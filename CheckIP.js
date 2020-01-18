@@ -12,7 +12,7 @@
 
  const emojis= ['🆘','🈲','⚠️','🔞','📵','🚦','🏖','🖥','📺','🐧','🐬','🦉','🍄','⛳️','🚴','🤑','👽','🤖','🎃', '👺', '👁', '🐶', '🐼','🐌', '👥']
  var city0 = " ";
- var isp0 = "Cross-GFW.org";
+ var isp0 = " ";
  function getRandomInt(max) {
    return Math.floor(Math.random() * Math.floor(max));
  }
@@ -22,7 +22,7 @@
    return para
    }
    else if(regionName=="臺灣省 or 台灣省"){
-   return city0
+   return city
    } 
    else
    {
@@ -30,8 +30,11 @@
    }
  }
 
- function ISP_ValidCheck(para) {
-   if(para=="LeaseWeb Asia Pacific Hong Kong"){
+ function ISP_ValidCheck(para) { 
+   if(para) {
+   return para
+   }
+   else if(para=="LeaseWeb Asia Pacific Hong Kong"){
    return "香港亚太租赁网"
    }
    else if {
@@ -63,11 +66,11 @@
   return "中西区"
    }
    else if(regionName=="臺灣省 or 台灣省"){
-   return city
+   return 'city'
    } 
    else if
    {
-   return city
+   return 'city'
    }
    else 
    {
