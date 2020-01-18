@@ -20,9 +20,6 @@
  function City_ValidCheck(para) {
    if(para) {
    return para
-   }
-   else if(regionName=="臺灣省 or 台灣省"){
-   return city
    } 
    else
    {
@@ -34,12 +31,7 @@
    if(para) {
    return para
    }
-   else if(para=="LeaseWeb Asia Pacific Hong Kong"){
-   return "香港亚太租赁网"
-   }
-   else if {
-   return para
-   } else
+   else
    {
    return isp0
  //emojis[getRandomInt(emojis.length)]
@@ -64,14 +56,7 @@
    } 
    else if(regionName=="Central and Western District"){
   return "中西区"
-   }
-   else if(regionName=="臺灣省 or 台灣省"){
-   return 'city'
    } 
-   else if
-   {
-   return 'city'
-   }
    else 
    {
    return regionName
