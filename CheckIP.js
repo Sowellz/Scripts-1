@@ -50,7 +50,6 @@
    }
  }
  function City_ValidCheck(regionName) {
-
    if(regionName=="Kowloon"){
    return "九龙"
    } 
@@ -65,9 +64,9 @@
    return regionName
    }
  }
- function ISP_ValidCheck(isp) {
-   if(isp=="LeaseWeb Asia Pacific Hong Kong"){
-  return "香港亚太租赁网"
+ function isp(para) {
+   if(para=="LeaseWeb Asia Pacific Hong Kong"){
+   return "香港亚太租赁网"
    }
    else
    {
