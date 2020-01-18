@@ -39,9 +39,6 @@
 
  function Area_check(para) {
    if(para=="中华民国"){
-   return "台湾"
-   } 
-   else if(para=="臺灣省 or 台灣省"){
    return "中国台湾"
    } 
    else if(para=="香港"){
@@ -60,6 +57,9 @@
    else if(regionName=="Central and Western District"){
   return "中西区"
    }
+   else if(regionName=="臺灣省 or 台灣省"){
+   return "台湾省"
+   } 
    else 
    {
    return regionName
