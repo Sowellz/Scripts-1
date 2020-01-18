@@ -20,10 +20,13 @@
  function City_ValidCheck(para) {
    if(para) {
    return para
-   } else
+   }
+   else if(regionName=="臺灣省 or 台灣省"){
+   return city0
+   } 
+   else
    {
    return city0
- //emojis[getRandomInt(emojis.length)]
    }
  }
 
