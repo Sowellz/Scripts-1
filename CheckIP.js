@@ -58,7 +58,7 @@
   return "中西区"
    }
    else if(regionName=="臺灣省 or 台灣省"){
-   return "台湾省"
+   return city0
    } 
    else 
    {
