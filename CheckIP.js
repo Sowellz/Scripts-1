@@ -67,7 +67,7 @@
    return regionName
    }
  }
- function isp(para) {
+ function ISP_ValidCheck(para) {
    if(para=="LeaseWeb Asia Pacific Hong Kong"){
    return "香港亚太租赁网"
    }
@@ -80,7 +80,7 @@
  var body = $response.body;
  var obj = JSON.parse(body);
  var title =Area_check(obj['country'])+' '+' '+City_ValidCheck(obj['regionName']);
- var subtitle =flags.get(obj['countryCode'])+ISP_ValidCheck(obj['regionName'])+obj['isp']+'🌍';
+ var subtitle =flags.get(obj['countryCode'])+City_ValidCheck(obj['regionName'])+obj['isp']+'🌍';
  var ip = obj['query'];
  var description = '服务商:'+obj['isp'] + '\n'+'地区:' +City_ValidCheck(obj['regionName'])+ '\n' + 'IP:'+ obj['query'] + '\n' +'时区:'+ obj['timezone'];
  $done({title, subtitle, ip, description});
