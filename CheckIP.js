@@ -40,10 +40,13 @@
 
  function Area_check(para) {
    if(para=="中华民国"){
-   return "中国台湾"
+   return "台湾省"
+   } 
+   else if(para=="台湾"){
+   return "台湾省"
    } 
    else if(para=="香港"){
-   return "中国香港"
+   return "香港特别行政区"
    } 
    else
    {
