@@ -55,10 +55,10 @@
    return "九龙"
    } 
    else if(regionName=="Central and Western District"){
-  return "中西区"
+   return "中西区"
    }
    else if(regionName=="臺灣省 or 台灣省"){
-   return city
+   return "台湾省"
    } 
    else 
    {
