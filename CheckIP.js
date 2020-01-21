@@ -74,10 +74,10 @@
    if(para=="Microsoft Azure Cloud (eastasia)"){
    return "微软Azure云"
    } 
-   else if (para=="Chunghwa Telecom Co. Ltd."){
+   else if(para=="Chunghwa Telecom Co. Ltd."){
    return "中华电信" 
    }
-   else if (para=="CNNIC-ALIBABA-US-NET-AP Alibaba (US) Technology Co., Ltd."){
+   else if(para=="CNNIC-ALIBABA-US-NET-AP Alibaba (US) Technology Co., Ltd."){
    return "阿里巴巴（美国）科技有限公司" 
    }
    else if {
