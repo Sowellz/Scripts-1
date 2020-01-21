@@ -111,5 +111,5 @@
 var title =Area_check(obj['country'])+' '+' '+City_ValidCheck(obj['regionName']);
 var subtitle =flags.get(obj['countryCode'])+obj['city']+'📀'+Org_ValidCheck(obj['org'])+'🌍'+obj['continent'];
 var ip = obj['query'];
-var description = '服务商:'+obj['isp'] +'\n'+'DNS:'+ obj['reverse'] +'\n'+'地区:' +City_ValidCheck(obj['regionName'])+obj['district']+'\n' +'洲际:'+obj['continent'] +'\n'+'IP:'+obj['query'] ++'\n' +'托管:'+ obj['hosting'];
+var description = '服务商:'+obj['isp'] +'\n'+'DNS:'+ obj['reverse'] +'\n'+'地区:' +City_ValidCheck(obj['regionName'])+obj['district']+'\n' +'洲际:'+obj['continent'] +'\n'+'IP:'+obj['query'] +'\n' +'托管:'+ obj['hosting'];
  $done({title, subtitle, ip, description});
