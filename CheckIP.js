@@ -71,22 +71,19 @@
    return regionName
    }
  }
-function Org_ValidCheck(para) { 
+ function Org_ValidCheck(para) { 
    if(para=="Microsoft Azure Cloud (eastasia)"){
    return "微软Azure云"
    } 
    else if(para=="Chunghwa Telecom Co. Ltd."){
    return "中华电信" 
    }
-   else if(para=="CNNIC-ALIBABA-US-NET-AP Alibaba (US) Technology Co., Ltd."){
-   return "阿里巴巴（美国）科技有限公司" 
-   }
-   else if {
-   return para 
+   else if(para=="Alibaba.com LLC."){
+   return "阿里云服务" 
    }
    else
    {
-   return isp0
+   return para
    }
  }
 
