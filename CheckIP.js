@@ -65,13 +65,13 @@
    else if(regionName=="新加坡"){
    return city0
    } 
-   else if(para=="Microsoft Corporation"){
+   else if(regionName=="Microsoft Corporation"){
    return "微软公司"
    } 
-   else if (para=="HINET"){
+   else if (regionName=="HINET"){
    return "中华电信" 
    }
-   else if (para=="CNNIC-ALIBABA-US-NET-AP Alibaba (US) Technology Co., Ltd."){
+   else if (regionName=="CNNIC-ALIBABA-US-NET-AP Alibaba (US) Technology Co., Ltd."){
    return "阿里巴巴（美国）科技有限公司" 
    }
    else 
