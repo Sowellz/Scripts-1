@@ -69,7 +69,9 @@
    else if(regionName=="新加坡"){
    return city0
    } 
-   
+   else if(regionName=="Tuen Mun"){
+   return "屯门"
+   } 
    else 
    {
    return regionName
@@ -94,6 +96,9 @@
    else if(para=="AWS EC2 (us-west-2)"){
    return "亚马逊云服务" 
    }
+   else if(para=="Newmedia Express PTE LTD"){
+   return "新媒体快递有限公司" 
+   }
    else
    {
    return para
@@ -104,7 +109,7 @@
  var body = $response.body;
  var obj = JSON.parse(body);
 var title =Area_check(obj['country'])+' '+' '+City_ValidCheck(obj['regionName']);
-var subtitle =flags.get(obj['countryCode'])+obj['district']+'📀'+Org_ValidCheck(obj['org'])+'🌍'+obj['continent'];
+var subtitle =flags.get(obj['countryCode'])+obj['city']+'📀'+Org_ValidCheck(obj['org'])+'🌍'+obj['continent'];
 var ip = obj['query'];
-var description = '服务商:'+obj['isp'] +'\n'+'DNS:'+ obj['reverse'] +'\n'+'地区:' +City_ValidCheck(obj['regionName'])+'\n' +'洲际:'+obj['continent'] +'\n'+'IP:'+obj['query'] +'\n' +'托管:'+ obj['hosting'];
+var description = '服务商:'+obj['isp'] +'\n'+'DNS:'+ obj['reverse'] +'\n'+'地区:' +City_ValidCheck(obj['regionName'])+obj['district']+'\n' +'洲际:'+obj['continent'] +'\n'+'IP:'+obj['query'] ++'\n' +'托管:'+ obj['hosting'];
  $done({title, subtitle, ip, description});
