@@ -65,15 +65,6 @@
    else if(regionName=="新加坡"){
    return city0
    } 
-   else if(regionName=="Microsoft Corporation"){
-   return "微软公司"
-   } 
-   else if (regionName=="HINET"){
-   return "中华电信" 
-   }
-   else if (regionName=="CNNIC-ALIBABA-US-NET-AP Alibaba (US) Technology Co., Ltd."){
-   return "阿里巴巴（美国）科技有限公司" 
-   }
    else 
    {
    return regionName
@@ -103,7 +94,7 @@
  var body = $response.body;
  var obj = JSON.parse(body);
 var title =Area_check(obj['country'])+' '+' '+City_ValidCheck(obj['regionName']);
-var subtitle =flags.get(obj['countryCode'])+ISP_ValidCheck(obj['regionName'])+obj['org']+obj['continent'];
+var subtitle =flags.get(obj['countryCode'])+ISP_ValidCheck(obj['org'])+obj['org']+obj['continent'];
 var ip = obj['query'];
 var description = '服务商:'+obj['isp'] +'\n'+'DNS:'+ obj['reverse'] +'\n'+'地区:' +City_ValidCheck(obj['regionName'])+ obj['query'] +'\n' +'洲际:'+obj['continent'] +'\n'+'IP:'+'\n' +'托管:'+ obj['hosting'];
  $done({title, subtitle, ip, description});
