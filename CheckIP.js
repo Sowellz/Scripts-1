@@ -71,7 +71,7 @@
    return regionName
    }
  }
-function ORG_ValidCheck(para) { 
+function Org_ValidCheck(para) { 
    if(para=="Microsoft Azure Cloud (eastasia)"){
    return "微软Azure云"
    } 
@@ -94,7 +94,7 @@ function ORG_ValidCheck(para) {
  var body = $response.body;
  var obj = JSON.parse(body);
 var title =Area_check(obj['country'])+' '+' '+City_ValidCheck(obj['regionName']);
-var subtitle =flags.get(obj['countryCode'])+ORG_ValidCheck(obj['org'])+obj['continent'];
+var subtitle =flags.get(obj['countryCode'])+Org_ValidCheck(obj['isp'])+obj['continent'];
 var ip = obj['query'];
 var description = '服务商:'+obj['isp'] +'\n'+'DNS:'+ obj['reverse'] +'\n'+'地区:' +City_ValidCheck(obj['regionName'])+'\n' +'洲际:'+obj['continent'] +'\n'+'IP:'+obj['query'] +'\n' +'托管:'+ obj['hosting'];
  $done({title, subtitle, ip, description});
