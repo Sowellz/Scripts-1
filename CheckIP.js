@@ -27,7 +27,7 @@
    }
  }
 
- function ISP_ValidCheck(para) { 
+/*   function ISP_ValidCheck(para) { 
    if(para) {
    return para
    }
@@ -37,7 +37,7 @@
  //emojis[getRandomInt(emojis.length)]
    }
  }
-
+*/
  function Area_check(para) {
    if(para=="中华民国"){
    return "台湾省"
@@ -71,14 +71,14 @@
    return regionName
    }
  }
-  function ISP_ValidCheck(isp) { 
-   if(isp=="Microsoft Corporation"){
+  function ISP_ValidCheck(para) { 
+   if(para=="Microsoft Corporation"){
    return "微软公司"
    } 
-   else if (isp=="HINET"){
+   else if (para=="HINET"){
    return "中华电信" 
    }
-   else if (isp=="CNNIC-ALIBABA-US-NET-AP Alibaba (US) Technology Co., Ltd."){
+   else if (para=="CNNIC-ALIBABA-US-NET-AP Alibaba (US) Technology Co., Ltd."){
    return "阿里巴巴（美国）科技有限公司" 
    }
    else if {
@@ -95,7 +95,7 @@
  var body = $response.body;
  var obj = JSON.parse(body);
 var title =Area_check(obj['country'])+' '+' '+City_ValidCheck(obj['regionName']);
-var subtitle =flags.get(obj['countryCode'])+ISP_ValidCheck(obj['isp'])+obj['isp']+obj['continent'];
+var subtitle =flags.get(obj['countryCode'])+ISP_ValidCheck(obj['regionName'])+obj['isp']+obj['continent'];
 var ip = obj['query'];
 var description = '服务商:'+obj['isp'] +'\n'+'DNS:'+ obj['reverse'] +'\n'+'地区:' +City_ValidCheck(obj['regionName'])+ obj['query'] +'\n' +'洲际:'+obj['continent'] +'\n'+'IP:'+'\n' +'托管:'+ obj['hosting'];
  $done({title, subtitle, ip, description});
