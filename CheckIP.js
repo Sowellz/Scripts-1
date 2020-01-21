@@ -71,7 +71,7 @@
    return regionName
    }
  }
-  function ISP_ValidCheck(para) { 
+ function ISP_ValidCheck(para) { 
    if(para=="Microsoft Corporation"){
    return "微软公司"
    } 
@@ -82,7 +82,7 @@
    return "阿里巴巴（美国）科技有限公司" 
    }
    else if {
-   return isp 
+   return para 
    }
    else
    {
