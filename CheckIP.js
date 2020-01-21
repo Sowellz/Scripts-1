@@ -63,9 +63,13 @@
    else if(regionName=="臺灣省 or 台灣省"){
    return city0
    } 
+   else if(regionName=="Moscow"){
+   return "莫斯科"
+   } 
    else if(regionName=="新加坡"){
    return city0
    } 
+   
    else 
    {
    return regionName
@@ -73,16 +77,22 @@
  }
  function Org_ValidCheck(para) { 
    if(para=="Microsoft Azure Cloud (eastasia)"){
-   return "微软Azure云"
+   return "微软云服务"
    } 
    else if(para=="Chunghwa Telecom Co. Ltd."){
    return "中华电信" 
    }
-   else if(para=="Alibaba.com LLC."){
+   else if(para=="Alibaba.com LLC"){
    return "阿里云服务" 
+   }
+   else if(para=="Hong Kong Telecommunications (HKT) Limited"){
+   return "香港电讯有限公司" 
    }
    else if(para=="DigitalOcean, LLC"){
    return "数字海洋有限公司" 
+   }
+   else if(para=="AWS EC2 (us-west-2)"){
+   return "亚马逊云服务" 
    }
    else
    {
