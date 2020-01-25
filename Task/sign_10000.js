@@ -12,10 +12,10 @@ function sign_10000() {
         method: 'POST',
         headers: {
             "Content-Type": `application/json;charset=utf-8`,
-            "User-Agent": `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;CtClient;7.6.0;iOS;13.3;iPhone 6s Plus`,
+            "User-Agent": `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;CtClient;7.7.0;iOS;13.3;iPhone 6s Plus`,
             "Host": `wapside.189.cn:9001`,
             "Origin": `https://wapside.189.cn:9001`,
-            "Referer": `https://wapside.189.cn:9001/resources/dist/signInActivity.html?cmpid=jt-khd-my-zygn&ticket=4cbda6f7ffae5f28d69ad1a22888040aca22938c70711cedc52fabc3af7303c1&version=7.6.0`,
+            "Referer": `https://wapside.189.cn:9001/resources/dist/signInActivity.html?cmpid=jt-khd-my-zygn&ticket=4cbda6f7ffae5f28d69ad1a22888040aa32b55f6d7148981982f9c342f115bb9&version=7.7.0`,
             Cookie: cookieVal
         },
         body: JSON.stringify({
