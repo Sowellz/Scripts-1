@@ -1,6 +1,7 @@
 var obj = JSON.parse($response.body);
  obj={
  "point" : {
+
   },
   "user" : {
     "mvp_count" : 630,
@@ -32,7 +33,7 @@ var obj = JSON.parse($response.body);
       "avatar" : "https://caiyunapp.com/imgs/webtrs/default.png",
       "is_xy_auto_renewal" : false,
       "platform_id" : "",
-      "xy_vip_expire" : 1579883391.0690739155,
+      "xy_vip_expire" : 1682084935.0690739155,
       "grade" : "积雨云",
       "name" : "***2326",
       "score" : 2000
@@ -41,7 +42,7 @@ var obj = JSON.parse($response.body);
     "created_at" : 1524308783,
     "daily_comment_count" : 0,
     "translation_count" : 751,
-    "username" : "***2326"
+    "username" : "***8888"
   },
   "rc" : 0
  };
