@@ -1,3 +1,7 @@
+/*# 此处用于爱奇艺cookie获取，加mitm后打开APP，点击“我的”，待弹出获取成功即可
+https:\/\/passport\.iqiyi\.com\/apis\/user\/info\.action.*authcookie url script-request-header Sunert/Task/
+*/
+
 var bonus = {
   url: 'https://tc.vip.iqiyi.com/taskCenter/task/queryUserTask?autoSign=yes&P00001=' + $prefs.valueForKey("CookieQY"),
 };

@@ -1,16 +1,5 @@
 /*
-Bilibili Manga Daily Bonus
-
-About the author:
-If reproduced, indicate the source
-Telegram channel: @NobyDa
-Telegram bots: @NobyDa_bot
-
-Description :
-When Bilibili Manga app is opened, click "My", If notification gets cookie success, you can use the check in script. because script will automatically judgment whether the cookie is updated, so you dont need to disable it manually.
-
-script will be performed every day at 9 am. You can modify the execution time.
-
+Bilibili 漫画每日奖励关于作者: 如果复制，指出来源 Telegram 频道:@nobyda Telegram bots:@nobyda bot Description: 当比利比里漫画应用程序打开时，点击"我的" ，如果通知获得 cookie 成功，你可以使用脚本检查。 因为脚本会自动判断 cookie 是否被更新，所以你不需要手动禁用它。 剧本每天早上9点上演。 您可以修改执行时间。
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
 [Script]

@@ -1,3 +1,16 @@
+/* [MITM]
+*.bilibili.com
+
+[rewrite_local]
+# 189及以前版本
+^https:\/\/(www|live)\.bilibili\.com\/?.? url script-response-body Sunert/Task/bilibili.cookie.js
+# 190及以后版本
+^https:\/\/(www|live)\.bilibili\.com\/?.? url script-request-header Sunert/Task/bilibili.cookie.js
+
+[task_local]
+1 0 * * * bilibili.js
+*/
+
 const cookieName = 'bilibili'
 const cookieKey = 'chavy_cookie_bilibili'
 const chavy = init()

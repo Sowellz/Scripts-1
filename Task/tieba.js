@@ -1,3 +1,11 @@
+/* 
+本配置为网页版
+
+#【需配置hostname = tieba.baidu.com】
+;^https?:\/\/tieba.baidu\.com url script-request-header Sunert/Task/tieba.js
+
+*/
+
 const cookieName = '百度贴吧'
 const cookieKey = 'chavy_cookie_tieba'
 const chavy = init()

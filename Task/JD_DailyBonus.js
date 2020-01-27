@@ -1,13 +1,5 @@
 /*
-JingDong bonus Seven in one
-
-Description :
-When using for the first time. Need to manually log in to the https://bean.m.jd.com checkin to get cookie. If notification gets cookie success, you can use the check in script.
-Due to the validity of cookie, if the script pops up a notification of cookie invalidation in the future, you need to repeat the above steps.
-
-Daily bonus script will be performed every day at 9 am. You can modify the execution time.
-If reprinted, please indicate the source. My TG channel @NobyDa
-
+京东花红七合一说明: 第一次使用时。 需要手动登录到 https://bean.m.jd.com 签到系统才能获得 cookie。 如果通知获得 cookie 成功，您可以使用签入脚本。 由于 cookie 的有效性，如果脚本将来弹出一个 cookie 无效的通知，那么您需要重复上面的步骤。 每天上午9点将执行每日奖励脚本。 您可以修改执行时间。 如果转载，请注明来源。 我的 TG 频道@nobyda
 Update 2020.1.15 20:00 v55
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :

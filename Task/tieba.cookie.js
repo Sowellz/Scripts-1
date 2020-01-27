@@ -1,3 +1,18 @@
+/* 
+
+# 如果您不想使用APP,则可以直接网页浏览https://tieba.baidu.com ,弹出获取提示即可
+先在浏览器登录 (先登录! 先登录! 先登录!)
+先把tieba.baidu.com加到[MITM]
+再配置重写规则:
+Surge: 把两条远程脚本放到[Script]
+QuanX: 把tieba.cookie.js和tieba.js传到On My iPhone - Quantumult X - Scripts (传到 iCloud 相同目录也可, 注意要打开 quanx 的 iCloud 开关)
+再用浏览器访问一下: https://tieba.baidu.com 或者 https://tieba.baidu.com/index/
+系统提示: 获取Cookie: 成功
+最后就可以把第 1 条脚本注释掉了
+
+#【需配置hostname = tieba.baidu.com】
+https?:\/\/tieba\.baidu\.com\/?.? url script-request-header Sunert/Task/tieba.cookie.js
+*/
 const cookieName = '百度贴吧'
 const cookieKey = 'chavy_cookie_tieba'
 const chavy = init()
