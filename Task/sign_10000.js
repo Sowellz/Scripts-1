@@ -10,10 +10,10 @@ sign()
 function sign() {
   let url = { url: `https://wapside.189.cn:9001/api/home/sign`, headers: { Cookie: cookieVal } }
   url.headers['Content-Type'] = 'application/json;charset=utf-8'
-  url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;CtClient;7.6.0;iOS;13.3;iPhone XR'
+  url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;CtClient;7.7.0;iOS;13.3.1;iPhone 6s Plus'
   url.headers['Host'] = 'wapside.189.cn:9001'
   url.headers['Origin'] = 'https://wapside.189.cn:9001'
-  url.headers['Referer'] = 'https://wapside.189.cn:9001/resources/dist/signInActivity.html?cmpid=jt-khd-my-zygn&ticket=0ab000281b4a8139f264620ae1d8b1ce067a6587921f90a6260dca4389a4e01a&version=7.6.0'
+  url.headers['Referer'] = 'https://wapside.189.cn:9001/resources/dist/signInActivity.html?cmpid=jt-khd-sy-zysj&ticket=4cbda6f7ffae5f28d69ad1a22888040a62f1981bc2217a71d4ed3909c029b60c&version=7.7.0'
   url.body = JSON.stringify({ phone: mobileVal })
   chavy.post(url, (error, response, data) => {
     chavy.log(`${cookieName}, data: ${data}`)
