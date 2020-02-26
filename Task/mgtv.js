@@ -1,39 +1,33 @@
-const cookieName = '电信营业厅'
-const cookieKey = 'chavy_cookie_10000'
-const mobileKey = 'chavy_mobile_10000'
+const cookieName = '芒果TV'
+const signurlKey = 'chavy_signurl_mgtv'
+const signheaderKey = 'chavy_signheader_mgtv'
 const chavy = init()
-const cookieVal = chavy.getdata(cookieKey)
-const mobileVal = chavy.getdata(mobileKey)
+const signurlVal = chavy.getdata(signurlKey)
+const signheaderVal = chavy.getdata(signheaderKey)
 
 sign()
 
 function sign() {
-  let url = { url: `https://wapside.189.cn:9001/api/home/sign`, headers: { Cookie: cookieVal } }
-  url.headers['Content-Type'] = 'application/json;charset=utf-8'
-  url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;CtClient;7.7.0;iOS;13.3.1;iPhone 6s Plus'
-  url.headers['Host'] = 'wapside.189.cn:9001'
-  url.headers['Origin'] = 'https://wapside.189.cn:9001'
-  url.headers['Referer'] = 'https://wapside.189.cn:9001/resources/dist/signInActivity.html?cmpid=jt-khd-my-zygn&ticket=4cbda6f7ffae5f28d69ad1a22888040a40061bb27355841226717cddf657bb6d&version=7.7.0'
-  url.body = JSON.stringify({ phone: mobileVal })
+  const url = { url: signurlVal, headers: JSON.parse(signheaderVal) }
+  url.body = '{}'
   chavy.post(url, (error, response, data) => {
     chavy.log(`${cookieName}, data: ${data}`)
-    let result = JSON.parse(data)
     const title = `${cookieName}`
-    let subTitle = ``
-    let detail = ``
-    if (result.data.code == 1) {
-      subTitle = `签到结果: 成功 (${mobileVal})`
-      detail = `获得金币${result.data.coin}, 金豆${result.data.flow}`
-    } else if (result.data.code == 0) {
-      subTitle = `签到结果: 重复 (${mobileVal})`
-      detail = `说明: ${result.data.msg}`
+    let subTitle = ''
+    let detail = ''
+    const result = JSON.parse(data.match(/\(([^\)]*)\)/)[1])
+    if (result.code == 200) {
+      subTitle = `签到结果: 成功`
+      detail = `共签: ${result.data.curDay}天, 连签: ${result.data.curDayTotal}天, 积分: ${result.data.balance} +${result.data.credits}）`
+    } else if (result.code == 1002) {
+      subTitle = `签到结果: 成功 (重复签到)`
     } else {
-      subTitle = `签到结果: 失败 (${mobileVal})`
-      detail = `说明: ${result.data.msg}`
+      subTitle = `签到结果: 失败`
+      detail = `编码: ${result.code}, 说明: ${result.msg}`
     }
     chavy.msg(title, subTitle, detail)
+    chavy.done()
   })
-  chavy.done()
 }
 
 function init() {
