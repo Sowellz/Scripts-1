@@ -1,11 +1,3 @@
-/* 
-本配置为网页版
-
-#【需配置hostname = tieba.baidu.com】
-;^https?:\/\/tieba.baidu\.com url script-request-header Sunert/Task/tieba.js
-
-*/
-
 const cookieName = '百度贴吧'
 const cookieKey = 'chavy_cookie_tieba'
 const chavy = init()
@@ -38,7 +30,6 @@ function signTieba() {
       if (bar.is_sign == 1) {
         signinfo.signedCnt += 1
         signinfo.skipedCnt += 1
-        chavy.log(`[${cookieName}] \"${bar.forum_name}\"签到结果: 跳过, 原因: 重复签到`)
       }
       // 未签
       else {
@@ -114,7 +105,7 @@ function signZhidao() {
         subTitle = `签到结果: 成功 (重复签到)`
         detail = `活跃: ${signresult.data.signInDataNum}天, 说明: ${signresult.errorMsg}`
         chavy.msg(title, subTitle, detail)
-        chavy.log(`[${title}] ${subTitle}, ${signdata}`)
+        chavy.log(`[${title}] ${subTitle}`)
       } else {
         subTitle = '签到结果: 失败'
         detail = `说明: ${signresult.errorMsg}`
@@ -140,7 +131,7 @@ function check(forums, signinfo, checkms = 0) {
     chavy.msg(title, subTitle, detail)
     chavy.done()
   } else {
-    if (checkms > 9000) {
+    if (checkms >20000) {
       subTitle = `签到结果: 超时退出 (请重试)`
       chavy.log(`${title}, ${subTitle}, ${detail}`)
       chavy.msg(title, subTitle, detail)
