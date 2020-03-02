@@ -11,7 +11,7 @@ function sign() {
   const url = { url: signurlVal, headers: JSON.parse(signheaderVal) }
   url.body = '{}'
   chavy.post(url, (error, response, data) => {
-    chavy.log(`${cookieName}, data: ${data}`)
+    
     const title = `${cookieName}`
     let subTitle = ''
     let detail = ''
@@ -26,6 +26,7 @@ function sign() {
       detail = `编码: ${result.code}, 说明: ${result.msg}`
     }
     chavy.msg(title, subTitle, detail)
+    console.log(subTitle,detail)
     chavy.done()
   })
 }

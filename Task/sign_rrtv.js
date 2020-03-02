@@ -28,7 +28,7 @@ function signdaily() {
   url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 App/RRSPApp platform/iPhone AppVersion/4.3.5'
 
   chavy.post(url, (error, response, data) => {
-    chavy.log(`${cookieName}, signdaily.data: ${data}`)
+    
     signinfo.signdaily = JSON.parse(data)
   })
 }
@@ -83,7 +83,6 @@ function getinfo() {
   url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 App/RRSPApp platform/iPhone AppVersion/4.3.5'
 
   chavy.post(url, (error, response, data) => {
-    chavy.log(`${cookieName}, userinfo: ${data}`)
     const result = JSON.parse(data)
     const title = `${cookieName}`
     let subTitle = ``
