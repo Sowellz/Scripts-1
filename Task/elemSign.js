@@ -5,7 +5,6 @@
 
 > 代码已同时兼容 Surge & QuanX, 使用同一份签到脚本即可
 
-
 ## 配置 (Surge)
 
 ```properties
@@ -16,7 +15,6 @@ h5.ele.me
 http-request ^https:\/\/h5\.ele\.me\/restapi\/eus\/v\d\/current_user$ script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/elemGetCookies.js
 cron "0 5 0 * * *" script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/elemSign.js
 ```
-
 ## 配置 (QuanX)
 
 ```properties
@@ -26,8 +24,6 @@ h5.ele.me
 [rewrite_local]
 
 ^https:\/\/h5\.ele\.me\/restapi\/eus\/v\d\/current_user$ url script-request-header nzw9314/Script/elemGetCookies.js
-
-
 
 [task_local]
 5 0 * * * elemSign.js
@@ -48,7 +44,6 @@ h5.ele.me
 > 第 2 条脚本是签到脚本, 每天`00:05:00`执行一次.
 */
 
-
 const cookieName = '饿了么'
 const cookieKey = 'cookie_elem'
 const UserId='user_id_elem'
@@ -58,7 +53,6 @@ var regx=/USERID=\d+/;
 
 var userid=cookieVal.match(regx)[0];
 userid=userid.replace('USERID=','');
-
 
 var headerscommon={
   'Content-Type':'application/json',
@@ -76,9 +70,6 @@ var signresult='';
 var turnstr='';
 //翻牌结果
 var turnresult=new Array;
-
-
-
 var hisresult;
 sign()
 
@@ -112,14 +103,11 @@ function dosign() {
         
         url.url += userid;
         url.url += endurl;
-        sy.log(url.url);
         sy.post(url, (error, response, data) => {
-          sy.log(response.status);
+        
           if (response.status == 200) {
             signresult = '签到结果: 成功🎉'
-            
-           
-          } else if (response.status == 400) {
+            } else if (response.status == 400) {
             signresult = '签到结果: 重复❗'
           
           }
@@ -156,9 +144,9 @@ function doturnover() {
         url.url += userid;
         url.url += endurl;
         //headers['Content-Type']='application/json';
-        sy.log(url);
+      
         sy.post(url, (error, response, data) => {
-         console.log(response);
+         
           var obj=JSON.parse(data);
 
           if (response.status == 200) {
@@ -198,7 +186,7 @@ function dosignhis() {
         }
         url.url += userid;
         url.url += endurl;
-        sy.log(url.url);
+    
         sy.get(url, (error, response, data) => {
          
           var obj=JSON.parse(data);
@@ -217,9 +205,8 @@ function dosignhis() {
 }
 
 function doNotify(){
-
-    console.log(hisresult);
-    console.log(turnresult);
+    
+    console.log(signresult);
     console.log(turnstr);
     var ret=signresult;
     var signday=0;
@@ -240,14 +227,6 @@ function doNotify(){
 
     sy.msg('饿了么签到','',ret);
 }
-
-
-
-
-
-
-
-
 
 
 function init() {
