@@ -1,5 +1,4 @@
 /* 
-
 # 如果您不想使用APP,则可以直接网页浏览https://tieba.baidu.com ,弹出获取提示即可
 先在浏览器登录 (先登录! 先登录! 先登录!)
 先把tieba.baidu.com加到[MITM]
