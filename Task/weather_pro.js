@@ -12,17 +12,16 @@ let config = {
     timeout: 0, //超时时间,单位毫秒(1000毫秒=1秒),一般不推荐修改[为0则不限制超时时间]
     show: {
         //普通每天的
-        template: {
-            title: `[天气日报] $[summary]`,
+    template: {
+            title: `$[city]$[district] $[summary]`,
             subtitle: `$[weatherIcon]$[weather] $[temperatureMin] ~ $[temperatureMax]°C ☔️降雨概率 $[precipProbability]%`,
-            detail: `🥵空气质量 $[aqi]($[aqiDesc]) 🍃风速$[windSpeed]km/h $[windDir]
-🌞紫外线指数 $[uv]($[uvDesc]) 💧湿度$[currentHumidity]%
-🌡体感温度 $[apparentTemperatureMin] ~ $[apparentTemperatureMax]°C 💨气压$[atmosphere]pa
-
+            detail: `$[aqiIcon]空气质量 $[aqi]($[aqiDesc]) 🏋🏻‍♀️气压$[atmosphere]pa
+🌪风速$[windSpeed]km/h   💨$[windDir]$[windPower]级
+👀紫外线指数 $[uv]($[uvDesc]) 💦湿度$[currentHumidity]%
+🌡体感温度 $[apparentTemperatureMin] ~ $[apparentTemperatureMax]°C 🎚当前温度 $[currentTemperature]℃
 [生活指数]
-$[lifeStyle($[icon][$[brf]]$[txt])]
-
-[天气周报]
+$[lifeStyle($[icon]：$[brf]，$[txt])]        
+[天气周报]  $[weeklySummary]
 $[daily($[month]月$[day]日  $[temperatureLow]~$[temperatureHigh]°C  $[weatherIcon]$[weather])]`
         },
         lifestyle: { //此处用于显示各项生活指数，可自行调整顺序，顺序越在前面则显示也会靠前，如果您不想查看某一指数，置为false即可，想看置为true即可
@@ -39,7 +38,7 @@ $[daily($[month]月$[day]日  $[temperatureLow]~$[temperatureHigh]°C  $[weather
             gl: false, //太阳镜指数,
             mu: false, //化妆指数,
             airc: false, //晾晒指数,
-            ptfc: false, //交通指数,
+            ptfc: true, //交通指数,
             fsh: false, //钓鱼指数,
             spi: false, //防晒指数
         }
