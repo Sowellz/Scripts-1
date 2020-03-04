@@ -5,7 +5,7 @@ let obj = <?xml version="1.0" encoding="UTF-8"?>
 	<key>appAdamId</key>
 	<string>1312014438</string>
 	<key>appExtVrsId</key>
-	<string>834569443</string>
+	<string>834412084</string>
 	<key>bid</key>
 	<string>app.cyan.jsbox</string>
 	<key>bvrs</key>
