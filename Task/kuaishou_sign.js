@@ -1,15 +1,41 @@
-const cookieName = '芒果TV'
-const signurlKey = 'chavy_signurl_mgtv'
-const signheaderKey = 'chavy_signheader_mgtv'
-const chavy = init()
 
-if ($request && $request.method != 'OPTIONS') {
- const signurlVal = $request.url
-  const signheaderVal = JSON.stringify($request.headers)
-  if (signurlVal) chavy.setdata(signurlVal, signurlKey)
-  if (signheaderVal) chavy.setdata(signheaderVal, signheaderKey)
-  chavy.msg(cookieName, `获取Cookie: 成功`, ``)
-}
+const CookieName = '快手'
+const CookieKey = 'cookie_ks'
+const UserId = 'userId'
+const matchid=/USERID=(\d+);/
+const sy = init()
+GetCookie();
+
+function GetCookie() {
+  if ($request.headers) {
+    var CookieValue = $request.headers['Cookie'];
+
+sign()
+
+function sign() {
+  const url = { url: signurlVal, headers: JSON.parse(signheaderVal) }
+  url.body = '{}'
+  sy.post(url, (error, response, data) => {
+    
+    const title = `${cookieName}`
+    let subTitle = ''
+    let detail = ''
+    const result = JSON.parse(data.dailyTasks.todayIsSigned)
+    if (result == true) {
+      subTitle = `签到结果: 成功`
+      detail = `签到状态: ${dailyTasks.todayIsSigned}, 签到描述: ${dailyTasks.desc}, 金币收益: ${data.totalCoin}）现金收益: ${data.totalCash}`
+    } else if (result == false) {
+      subTitle = `签到结果: 成功 (重复签到)`
+    } else {
+      subTitle = `签到结果: 失败`
+      detail = `编码: ${result.code}, 说明: ${result.msg}`
+    }
+    sy.msg(title, subTitle, detail)
+    console.log(subTitle,detail)
+    $notify(title, subtitle, detail),
+    sy.done()
+  })
+};
 
 function init() {
   isSurge = () => {
@@ -53,5 +79,4 @@ function init() {
     $done(value)
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
-}
-chavy.done()
+};
