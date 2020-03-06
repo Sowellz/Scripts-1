@@ -1,42 +1,74 @@
+/*
+
+
+*/
 
 const CookieName = '快手'
 const CookieKey = 'cookie_ks'
-const UserId = 'userId'
-const matchid=/USERID=(\d+);/
-const sy = init()
-GetCookie();
-
-function GetCookie() {
-  if ($request.headers) {
-    var CookieValue = $request.headers['Cookie'];
+const chavy = init()
+var cookieVal = chavy.getdata(CookieKey);
 
 sign()
 
 function sign() {
-  const url = { url: signurlVal, headers: JSON.parse(signheaderVal) }
-  url.body = '{}'
-  sy.post(url, (error, response, data) => {
-    
-    const title = `${cookieName}`
-    let subTitle = ''
-    let detail = ''
-    const result = JSON.parse(data.dailyTasks.todayIsSigned)
-    if (result == true) {
-      subTitle = `签到结果: 成功`
-      detail = `签到状态: ${dailyTasks.todayIsSigned}, 签到描述: ${dailyTasks.desc}, 金币收益: ${data.totalCoin}）现金收益: ${data.totalCash}`
-    } else if (result == false) {
-      subTitle = `签到结果: 成功 (重复签到)`
-    } else {
-      subTitle = `签到结果: 失败`
-      detail = `编码: ${result.code}, 说明: ${result.msg}`
+  let url = {
+    url: `https://nebula.kuaishou.com/rest/n/nebula/sign/query`,
+    headers: {
+      Cookie: cookieVal
     }
-    sy.msg(title, subTitle, detail)
-    console.log(subTitle,detail)
-    $notify(title, subtitle, detail),
-    sy.done()
-  })
-};
+  }
+  url.headers['Origin'] = 'nebula.kuaishou.com'
+  url.headers['Referer'] = 'https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4'
+  url.headers['Accept'] = 'application/json, text/javascript, */*; q=0.01'
+  url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65'
 
+  chavy.get(url, (error, response, data) => {
+    let result = JSON.parse(data)
+    let title = `${cookieName}`
+    // 签到成功
+    if (result && result.code == 1) {
+      let subTitle = `签到结果: 成功`
+      let detail = `连续签到 :${data.nebulaSignInPopup.subTitle}`
+      chavy.msg(title, subTitle, detail)
+    }
+    // 用户未登录
+    else if (result && result.code == 10007) {
+      getsigninfo()
+    }
+    // 签到失败
+    else {
+      let subTitle = `签到结果: 失败`
+      let detail = `说明: ${error_msg}`
+      chavy.msg(title, subTitle, detail)
+    }
+    chavy.log(`${cookieName}, data: ${data}`)
+  })
+
+  chavy.done()
+}
+function getsigninfo() {
+  let url = {
+    url: `https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview`,
+    headers: {
+      Cookie: cookieVal
+    }
+  }
+  url.headers['Host'] = 'nebula.kuaishou.com'
+  url.headers['Origin'] = 'nebula.kuaishou.com'
+  url.headers['Referer'] = 'https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4'
+  url.headers['Accept'] = 'application/json, text/javascript, */*; q=0.01'
+  url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65'
+
+  chavy.get(url, (error, response, data) => {
+    let title = `${cookieName}`
+    let subTitle = `签到结果: 成功 (重复签到)`
+    let detail = ``
+    let result = JSON.parse(data)
+    if (result && result.code == 0) detail = `连续签到 :${data.nebulaSignInPopup.subTitle&title}`
+    chavy.msg(title, subTitle, detail)
+    console.log(title, subTitle, detail)
+  })
+}
 function init() {
   isSurge = () => {
     return undefined === this.$httpClient ? false : true
@@ -79,4 +111,4 @@ function init() {
     $done(value)
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
-};
+}

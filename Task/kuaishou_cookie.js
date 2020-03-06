@@ -1,7 +1,7 @@
 
 const CookieName = '快手'
 const CookieKey = 'cookie_ks'
-const UserId = 'UserId'
+const UserId = 'user_id_ks'
 const matchid=/USERID=(\d+);/
 const sy = init()
 GetCookie();
