@@ -1,22 +1,22 @@
-const cookieName ='快手极速版'
-const cookieKey = 'cookie_ks'
-const ny = init()
-const cookieVal = ny.getdata(cookieKey);
+const cookieName ='京东到家'
+const cookieKey = 'chen_cookie_dj'
+const chen = init()
+const cookieVal = chen.getdata(cookieKey)
 sign()
 function sign() {
-    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
+    let url = {url: 'https://daojia.jd.com/client?functionId=signin%2FuserSigninNew&body=%7B%7D',
     headers: {Cookie:cookieVal}}
     url.headers['Connection'] = `keep-alive`
-    url.headers['Content-Type'] = `application/json;charset=UTF-8`
-    url.headers['Accept'] = `application/json, text/plain, */* `
-    url.headers['Host'] = `nebula.kuaishou.com`
-    url.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65`
-    url.headers['Accept-Language'] = `zh-cn`
+    url.headers['Content-Type'] = `application/x-www-form-urlencoded;charset=UTF-8`
+    url.headers['Accept'] = `*/*`
+    url.headers['Host'] = `daojia.jd.com`
+    url.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 application=JDJR-App&deviceld=D6B42097-7660-464C-AE01-E5A3CFB2F788&clientType=ios`
+    url.headers['Accept-Language'] = `zn-ch`
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
-    url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4`
+    url.headers['Referer'] = `https://daojia.jd.com/taroh5/h5dist/`
    
-    ny.get(url, (error, response, data) => {
-      ny.log(`${cookieName}, data: ${data}`)
+    chen.get(url, (error, response, data) => {
+      chen.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       
       const title = `${cookieName}`
@@ -25,18 +25,18 @@ function sign() {
     
       if (result.code == 0) {
         subTitle = `签到结果:   成功`
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
-      } else if(result.code==10007){
+        detail = `获取鲜豆：${result.result.points}`
+      } else if(result.code==201){
         subTitle = `签到结果: 失败`
-        detail = `说明: ${result.error_msg}`
+        detail = `说明: 未知`
       } else {
         subTitle = `签到结果: 重复签到`
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+        detail = `说明: ${result.msg}`
       }
-      ny.msg(title, subTitle, detail)
-      ny.log(`${result.data.totalCoin}`)
+      chen.msg(title, subTitle, detail)
+      chen.log(`${result.totalBalanceAmount}`)
     })
-    ny.done()
+    chen.done()
     }
 
   function init() {

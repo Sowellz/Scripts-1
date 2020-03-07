@@ -4,7 +4,7 @@ const ny = init()
 const cookieVal = ny.getdata(cookieKey);
 sign()
 function sign() {
-    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
+    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/sign/query',
     headers: {Cookie:cookieVal}}
     url.headers['Connection'] = `keep-alive`
     url.headers['Content-Type'] = `application/json;charset=UTF-8`
@@ -25,16 +25,16 @@ function sign() {
     
       if (result.code == 0) {
         subTitle = `签到结果:   成功`
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+        detail = `${result.data.nebulaSignInPopup.title}`
       } else if(result.code==10007){
         subTitle = `签到结果: 失败`
         detail = `说明: ${result.error_msg}`
       } else {
         subTitle = `签到结果: 重复签到`
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+        detail = `说明:${result.data.nebulaSignInPopup.title}`
       }
       ny.msg(title, subTitle, detail)
-      ny.log(`${result.data.totalCoin}`)
+      ny.log(`${result.data.nebulaSignInPopup.title}`)
     })
     ny.done()
     }

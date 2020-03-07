@@ -160,7 +160,7 @@ function doturnover(count,time) {
 
       try {
         var endurl = '/sign_in/daily/prize'
-        let body = { "channel": "app", "index": random(0, 3), "longitude": 116.334716796875, "latitude": 59.73897171020508 };
+        let body = { "channel": "app", "index": random(0, 3), "longitude": 114.308055, "latitude":22.7042073 };
         url = {
           url: `https://h5.ele.me/restapi/member/v2/users/`,
           headers: headerscommon,

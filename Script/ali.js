@@ -7,4 +7,4 @@ let obj = JSON.parse($response.body);
              obj.data["gmtEndMs"]="";
              obj.data["actionMode"]="0";
              obj.data["viewType"]="0";
-　　         　　$done({body: JSON.stringify(obj)});
+　　　$done({body: JSON.stringify(obj)});
