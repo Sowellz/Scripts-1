@@ -1,10 +1,43 @@
+/*
+本脚本仅适用于快手极速版签到
+获取Cookie方法:
+1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
+下，
+2.APP登陆账号后，点击'钱包',即可获取Cookie.
+
+仅测试Quantumult x，Surge、Loon自行测试
+by Macsuny
+感谢
+@Chavy
+@Nobyda
+本人为初学者，专业问题请向大佬请教
+~~~~~~~~~~~~~~~~
+Surge 4.0 :
+[Script]
+cron "0 9 * * *" script-path=kuaishou-sign.js
+
+# 获取快手极速版 Cookie.
+http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=kuaishou-cookie.js
+~~~~~~~~~~~~~~~~
+QX 1.0.5 :
+[task_local]
+0 9 * * * kuaishou_sign.js
+
+[rewrite_local]
+# Get bilibili cookie. QX 1.0.5(188+):
+https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishou_cookie.js
+~~~~~~~~~~~~~~~~
+QX or Surge MITM = nebula.kuaishou.com
+~~~~~~~~~~~~~~~~
+
+*/
 const cookieName ='快手极速版'
 const cookieKey = 'cookie_ks'
-const ny = init()
-const cookieVal = ny.getdata(cookieKey);
+const sy = init()
+const cookieVal = sy.getdata(cookieKey);
 sign()
 function sign() {
-    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/sign/query',
+    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/sign/sign',
     headers: {Cookie:cookieVal}}
     url.headers['Connection'] = `keep-alive`
     url.headers['Content-Type'] = `application/json;charset=UTF-8`
@@ -17,26 +50,31 @@ function sign() {
    
     ny.get(url, (error, response, data) => {
       ny.log(`${cookieName}, data: ${data}`)
+    sy.get(url, (error, response, data) => {
+      sy.log(`${cookieName}, url.response.body`)
       let result = JSON.parse(data)
       
       const title = `${cookieName}`
       let subTitle = ``
       let detail = ``
     
-      if (result.code == 0) {
+      if (result.result == 1) {
         subTitle = `签到结果:   成功`
-        detail = `${result.data.nebulaSignInPopup.title}`
-      } else if(result.code==10007){
+        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+      } else if(result.result == 10007){
         subTitle = `签到结果: 失败`
         detail = `说明: ${result.error_msg}`
-      } else {
+      }  else if(result.result == 10901){
         subTitle = `签到结果: 重复签到`
-        detail = `说明:${result.data.nebulaSignInPopup.title}`
+        detail = `说明: ${result.error_msg}`
+      } else {
+        subTitle = `签到结果: 未知`
+        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
       }
-      ny.msg(title, subTitle, detail)
-      ny.log(`金币收益: ${result.data.nebulaSignInPopup.title}`)
+      sy.msg(title, subTitle, detail)
+      sy.log(`获取收益: ${result.data.totalCoin}`)
     })
-    ny.done()
+    sy.done()
     }
 
   function init() {
