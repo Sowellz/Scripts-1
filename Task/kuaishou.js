@@ -1,5 +1,5 @@
 /*
-本脚本仅适用于快手极速版签到
+本脚本仅适用于快手极速版查询收益
 获取Cookie方法:
 1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
 下，
@@ -37,7 +37,7 @@ const sy = init()
 const cookieVal = sy.getdata(cookieKey);
 sign()
 function sign() {
-    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/sign/sign',
+    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
     headers: {Cookie:cookieVal}}
     url.headers['Connection'] = `keep-alive`
     url.headers['Content-Type'] = `application/json;charset=UTF-8`
@@ -57,25 +57,25 @@ function sign() {
       let detail = ``
     
       if (result.result == 1) {
-        subTitle = `签到结果:   成功`
-        detail = `今日金币收益: ${result.data.totalCoin}`
+        subTitle = `查询结果:   成功`
+        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
       } else if(result.result == 10007){
-        subTitle = `签到结果: 用户未登录`
+        subTitle = `查询结果: 失败`
         detail = `说明: ${result.error_msg}`
       } else if(result.result == 10901){
         subTitle = `签到结果: 重复签到`
         detail = `说明: ${result.error_msg}`
-      }
-      else {
-        subTitle = `签到结果: 未知`
-        detail = `说明: ${result.error_msg}`
+      } else {
+        subTitle = `查询结果: 重复签到`
+        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
       }
       sy.msg(title, subTitle, detail)
       sy.log(`获取收益: ${result.data.totalCoin}`)
     })
     sy.done()
     }
-function init() {
+
+  function init() {
     isSurge = () => {
       return undefined === this.$httpClient ? false : true
     }

@@ -14,7 +14,7 @@ by Macsuny
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
 [Script]
-cron "0 9 * * *" script-path=kuaishou-sign.js
+cron "0 9 * * *" script-path=kuaishou_sign.js
 
 # 获取快手极速版 Cookie.
 http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=kuaishou-cookie.js
@@ -37,7 +37,7 @@ const sy = init()
 const cookieVal = sy.getdata(cookieKey);
 sign()
 function sign() {
-    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
+    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/sign/sign',
     headers: {Cookie:cookieVal}}
     url.headers['Connection'] = `keep-alive`
     url.headers['Content-Type'] = `application/json;charset=UTF-8`
@@ -57,25 +57,25 @@ function sign() {
       let detail = ``
     
       if (result.result == 1) {
-        subTitle = `查询结果:   成功`
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+        subTitle = `签到结果:   成功`
+        detail = `今日金币收益: ${result.data.totalCoin}`
       } else if(result.result == 10007){
-        subTitle = `查询结果: 失败`
+        subTitle = `签到结果: 用户未登录`
         detail = `说明: ${result.error_msg}`
-      } //else if(result.result == 10901){
-        //subTitle = `签到结果: 重复签到`
-        //detail = `说明: ${result.error_msg}`
-      } else {
-        subTitle = `查询结果: 重复签到`
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+      } else if(result.result == 10901){
+        subTitle = `签到结果: 重复签到`
+        detail = `说明: ${result.error_msg}`
+      }
+      else {
+        subTitle = `签到结果: 未知`
+        detail = `说明: ${result.error_msg}`
       }
       sy.msg(title, subTitle, detail)
       sy.log(`获取收益: ${result.data.totalCoin}`)
     })
     sy.done()
     }
-
-  function init() {
+function init() {
     isSurge = () => {
       return undefined === this.$httpClient ? false : true
     }
