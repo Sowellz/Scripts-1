@@ -24,17 +24,38 @@ cookie失效时间未知
 @chavy
 @nobyda
 */
-const cookieName = '京东到家'
-const cookieKey = 'chen_cookie_dj'
-const chen = init()
-const cookieVal = chen.getdata(cookieKey)
-if (cookieVal) {
-  if (chen.setdata(cookieVal, cookieKey)) {
-    chen.msg(`${cookieName}`, '获取Cookie: 成功', '')
-    chen.log(`[${cookieName}] 获取Cookie: 成功, cookie: ${cookieVal}`)
+const CookieName = '京东到家'
+const CookieKey = 'chen_cookie_dj'
+const sy = init()
+GetCookie();
+
+function GetCookie() {
+  if ($request.headers) {
+    var CookieValue = $request.headers['Cookie'];
+    
+    if (sy.getdata(CookieKey) != (undefined || null)) {
+      if (sy.getdata(CookieKey) != CookieValue) {
+        var cookie = sy.setdata(CookieValue, CookieKey);
+        if (!cookie) {
+          sy.msg("更新" + CookieName + "Cookie失败‼️", "", "");
+          sy.log(`[${CookieName}] 获取Cookie: 失败`);
+        } else {
+          sy.msg("更新" + CookieName + "Cookie成功 🎉", "", "");
+          sy.log(`[${CookieName}] 获取Cookie: 成功, Cookie: ${CookieValue}`)
+        }
+      }
+    } else {
+      var cookie = sy.setdata(CookieValue, CookieKey);
+      if (!cookie) {
+        sy.msg("首次写入" + CookieName + "Cookie失败‼️", "", "");
+      } else {
+        sy.msg("首次写入" + CookieName + "Cookie成功 🎉", "", "");
+      }
+    }
+  } else {
+    sy.msg("写入" + CookieName + "Cookie失败‼️", "", "配置错误, 无法读取请求头, ");
   }
 }
-
 function init() {
   isSurge = () => {
     return undefined === this.$httpClient ? false : true
@@ -78,4 +99,4 @@ function init() {
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
 }
-chen.done()
+sy.done()

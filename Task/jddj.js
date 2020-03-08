@@ -11,7 +11,7 @@ function sign() {
     url.headers['Accept'] = `*/*`
     url.headers['Host'] = `daojia.jd.com`
     url.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 application=JDJR-App&deviceld=D6B42097-7660-464C-AE01-E5A3CFB2F788&clientType=ios`
-    url.headers['Accept-Language'] = `zn-ch`
+    url.headers['Accept-Language'] = `zh-cn`
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Referer'] = `https://daojia.jd.com/taroh5/h5dist/`
    
@@ -26,11 +26,15 @@ function sign() {
       if (result.code == 0) {
         subTitle = `签到结果:   成功`
         detail = `获取鲜豆：${result.result.points}`
-      } else if(result.code==201){
-        subTitle = `签到结果: 失败`
-        detail = `说明: 未知`
-      } else {
+      } else if (result.code == -1) {
         subTitle = `签到结果: 重复签到`
+        detail = `说明: ${result.msg}`
+      }
+      else if(result.code==201){
+        subTitle = `签到结果: 失败`
+        detail = `说明: 未登录`
+      } else {
+        subTitle = `签到结果: 未知`
         detail = `说明: ${result.msg}`
       }
       chen.msg(title, subTitle, detail)

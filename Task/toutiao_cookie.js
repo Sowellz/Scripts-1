@@ -1,39 +1,5 @@
-/*
-本脚本仅适用于快手极速版签到
-获取Cookie方法:
-1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
-下，
-2.APP登陆账号后，点击'钱包',即可获取Cookie.
-
-仅测试Quantumult x，Surge、Loon自行测试
-by Macsuny
-感谢
-@Chavy
-@Nobyda
-本人为初学者，专业问题请向大佬请教
-~~~~~~~~~~~~~~~~
-Surge 4.0 :
-[Script]
-cron "0 9 * * *" script-path=kuaishou-sign.js
-
-# 获取快手极速版 Cookie.
-http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=kuaishou-cookie.js
-~~~~~~~~~~~~~~~~
-QX 1.0.5 :
-[task_local]
-0 9 * * * kuaishou_sign.js
-
-[rewrite_local]
-# Get bilibili cookie. QX 1.0.5(188+):
-https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishou_cookie.js
-~~~~~~~~~~~~~~~~
-QX or Surge MITM = nebula.kuaishou.com
-~~~~~~~~~~~~~~~~
-
-*/
-
-const CookieName = '快手'
-const CookieKey = 'cookie_ks'
+const CookieName = '今日头条'
+const CookieKey = 'cookie_toutiao'
 const sy = init()
 GetCookie();
 

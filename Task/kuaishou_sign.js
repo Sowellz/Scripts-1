@@ -1,7 +1,40 @@
+/*
+本脚本仅适用于快手极速版签到
+获取Cookie方法:
+1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
+下，
+2.APP登陆账号后，点击'钱包',即可获取Cookie.
+
+仅测试Quantumult x，Surge、Loon自行测试
+by Macsuny
+感谢
+@Chavy
+@Nobyda
+本人为初学者，专业问题请向大佬请教
+~~~~~~~~~~~~~~~~
+Surge 4.0 :
+[Script]
+cron "0 9 * * *" script-path=kuaishou-sign.js
+
+# 获取快手极速版 Cookie.
+http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=kuaishou-cookie.js
+~~~~~~~~~~~~~~~~
+QX 1.0.5 :
+[task_local]
+0 9 * * * kuaishou_sign.js
+
+[rewrite_local]
+# Get bilibili cookie. QX 1.0.5(188+):
+https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishou_cookie.js
+~~~~~~~~~~~~~~~~
+QX or Surge MITM = nebula.kuaishou.com
+~~~~~~~~~~~~~~~~
+
+*/
 const cookieName ='快手极速版'
 const cookieKey = 'cookie_ks'
-const ny = init()
-const cookieVal = ny.getdata(cookieKey);
+const sy = init()
+const cookieVal = sy.getdata(cookieKey);
 sign()
 function sign() {
     let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
@@ -15,8 +48,8 @@ function sign() {
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4`
    
-    ny.get(url, (error, response, data) => {
-      ny.log(`${cookieName}, data: ${data}`)
+    sy.get(url, (error, response, data) => {
+      sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       
       const title = `${cookieName}`
@@ -26,17 +59,17 @@ function sign() {
       if (result.code == 0) {
         subTitle = `签到结果:   成功`
         detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
-      } else if(result.code==10007){
+      } else if(result.result == 10007){
         subTitle = `签到结果: 失败`
         detail = `说明: ${result.error_msg}`
       } else {
         subTitle = `签到结果: 重复签到`
         detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
       }
-      ny.msg(title, subTitle, detail)
-      ny.log(`${result.data.totalCoin}`)
+      sy.msg(title, subTitle, detail)
+      sy.log(`获取收益: ${result.data.totalCoin}`)
     })
-    ny.done()
+    sy.done()
     }
 
   function init() {

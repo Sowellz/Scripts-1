@@ -17,7 +17,7 @@ let config = {
     name: "中国电信套餐",
     authTokenKey: "china_telecom_authToken_10000",
     delay: 0,//自定义延迟签到,单位毫秒,(如填200则每个接口延迟0.2秒执行),默认无延迟
-    info: false   // 是否显示手机归属地
+    info: true   // 是否显示手机归属地
 }
 
 
