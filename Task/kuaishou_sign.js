@@ -56,14 +56,17 @@ function sign() {
       let subTitle = ``
       let detail = ``
     
-      if (result.code == 0) {
+      if (result.result == 1) {
         subTitle = `签到结果:   成功`
         detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
       } else if(result.result == 10007){
         subTitle = `签到结果: 失败`
         detail = `说明: ${result.error_msg}`
-      } else {
+      } else if(result.result == 10901){
         subTitle = `签到结果: 重复签到`
+        detail = `说明: ${result.error_msg}`
+      } else {
+        subTitle = `签到结果: 未知`
         detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
       }
       sy.msg(title, subTitle, detail)

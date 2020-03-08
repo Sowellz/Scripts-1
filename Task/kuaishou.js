@@ -48,10 +48,8 @@ function sign() {
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4`
    
-    ny.get(url, (error, response, data) => {
-      ny.log(`${cookieName}, data: ${data}`)
     sy.get(url, (error, response, data) => {
-      sy.log(`${cookieName}, url.response.body`)
+      sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       
       const title = `${cookieName}`
@@ -60,24 +58,24 @@ function sign() {
     
       if (result.result == 1) {
         subTitle = `签到结果:   成功`
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+        detail = `今日金币收益: ${result.data.totalCoin}`
       } else if(result.result == 10007){
-        subTitle = `签到结果: 失败`
+        subTitle = `签到结果: 用户未登录`
         detail = `说明: ${result.error_msg}`
-      }  else if(result.result == 10901){
+      } else if(result.result == 10901){
         subTitle = `签到结果: 重复签到`
         detail = `说明: ${result.error_msg}`
-      } else {
+      }
+      else {
         subTitle = `签到结果: 未知`
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+        detail = `说明: ${result.error_msg}`
       }
       sy.msg(title, subTitle, detail)
       sy.log(`获取收益: ${result.data.totalCoin}`)
     })
     sy.done()
     }
-
-  function init() {
+function init() {
     isSurge = () => {
       return undefined === this.$httpClient ? false : true
     }
