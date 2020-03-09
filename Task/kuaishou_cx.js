@@ -31,6 +31,7 @@ QX or Surge MITM = nebula.kuaishou.com
 ~~~~~~~~~~~~~~~~
 
 */
+
 const cookieName ='快手极速版'
 const cookieKey = 'cookie_ks'
 const sy = init()
@@ -47,15 +48,13 @@ function sign() {
     url.headers['Accept-Language'] = `zh-cn`
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4`
-   
+
     sy.get(url, (error, response, data) => {
-      sy.log(`${cookieName}, data: ${data}`)
+      // sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
-      
       const title = `${cookieName}`
       let subTitle = ``
       let detail = ``
-    
       if (result.result == 1) {
         subTitle = `查询结果:   成功`
         detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
@@ -66,15 +65,14 @@ function sign() {
         subTitle = `签到结果: 重复签到`
         detail = `说明: ${result.error_msg}`
       } else {
-        subTitle = `查询结果: 重复签到`
+        subTitle = `查询结果: 未知`
         detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
       }
       sy.msg(title, subTitle, detail)
-      sy.log(`获取收益: ${result.data.totalCoin}`)
+      sy.log(`获取收益: ${result.data.totalCoin},返回结果代码:${result.result}`)
     })
     sy.done()
     }
-
   function init() {
     isSurge = () => {
       return undefined === this.$httpClient ? false : true

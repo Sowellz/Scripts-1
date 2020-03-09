@@ -1,5 +1,5 @@
 /*
-本脚本仅适用于快手极速版签到
+本脚本仅适用于快手极速版精简版签到
 获取Cookie方法:
 1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
 下，
@@ -14,7 +14,7 @@ by Macsuny
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
 [Script]
-cron "0 9 * * *" script-path=kuaishou-sign.js
+cron "0 9 * * *" script-path=kuaishou_sign.js
 
 # 获取快手极速版 Cookie.
 http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=kuaishou-cookie.js
@@ -47,46 +47,34 @@ function sign() {
     url.headers['Accept-Language'] = `zh-cn`
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4`
-    
-  }
-
-    
-cash()
-function cash() {
-    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
-    headers: {Cookie:cookieVal}}
-    url.headers['Connection'] = `keep-alive`
-    url.headers['Content-Type'] = `application/json;charset=UTF-8`
-    url.headers['Accept'] = `application/json, text/plain, */* `
-    url.headers['Host'] = `nebula.kuaishou.com`
-    url.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65`
-    url.headers['Accept-Language'] = `zh-cn`
-    url.headers['Accept-Encoding'] = `gzip, deflate, br`
-    url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4`
    
     sy.get(url, (error, response, data) => {
       sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
-  
+      
       const title = `${cookieName}`
       let subTitle = ``
       let detail = ``
+    
       if (result.result == 1) {
         subTitle = `签到结果:   成功`
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+        detail = `今日金币收益: ${result.data.totalCoin}`
       } else if(result.result == 10007){
-        subTitle = `签到结果: 未登录`
+        subTitle = `签到结果: 用户未登录`
         detail = `说明: ${result.error_msg}`
-      } else {
+      } else if(result.result == 10901){
+        subTitle = `签到结果: 重复签到`
+        detail = `说明: ${result.error_msg}`
+      }
+      else {
         subTitle = `签到结果: 未知`
         detail = `说明: ${result.error_msg}`
-      } 
-      sy.log(title, detail)
-     sy.msg(title, subTitle, detail)
+      }
+      sy.msg(title, subTitle, detail)
+      sy.log(`获取收益: ${result.data.totalCoin}`)
     })
     sy.done()
-  }
-    
+    }
 function init() {
     isSurge = () => {
       return undefined === this.$httpClient ? false : true

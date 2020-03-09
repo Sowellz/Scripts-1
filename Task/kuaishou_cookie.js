@@ -31,7 +31,6 @@ QX or Surge MITM = nebula.kuaishou.com
 ~~~~~~~~~~~~~~~~
 
 */
-
 const CookieName = '快手'
 const CookieKey = 'cookie_ks'
 const sy = init()
