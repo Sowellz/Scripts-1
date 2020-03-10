@@ -30,7 +30,7 @@ function sign() {
         subTitle = `签到结果: 重复签到`
         detail = `说明: ${result.msg}`
       }
-      else if(result.code==201){
+      else if(result.code==202){
         subTitle = `签到结果: 失败`
         detail = `说明: 未登录`
       } else {
