@@ -281,12 +281,8 @@ function doNotify() {
       ret = ret + '***获得：' + turnresult[i].prizes[0].name + '(' + turnresult[i].prizes[0].amount + ')元🧧\n';
     }
   }
- 
-
   sy.msg('饿了么', '', ret);
 }
-
-
 
 function init() {
   isSurge = () => {
@@ -333,8 +329,6 @@ function init() {
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
 }
-
-
 
 function random(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;

@@ -31,17 +31,22 @@ QX or Surge MITM = nebula.kuaishou.com
 ~~~~~~~~~~~~~~~~
 
 */
-const cookieName ='快手极速版'
+const cookieName = '快手极速版'
 const cookieKey = 'cookie_ks'
-const sy = init()
+const sy = init() 
 const cookieVal = sy.getdata(cookieKey);
-sign()
+sign() 
 function sign() {
-    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/sign/sign',
-    headers: {Cookie:cookieVal}}
-    url.headers['Connection'] = `keep-alive`
-    url.headers['Content-Type'] = `application/json;charset=UTF-8`
-    url.headers['Accept'] = `application/json, text/plain, */* `
+	let url = {
+		url: 'https://nebula.kuaishou.com/rest/n/nebula/sign/sign',
+		headers: {
+			Cookie: cookieVal
+		}
+	}
+	url.headers['Connection'] = `keep - alive`
+	url.headers['Content-Type'] = `application / json;
+	charset = UTF - 8`
+	url.headers['Accept'] = `application / json, text / plain,*/* `
     url.headers['Host'] = `nebula.kuaishou.com`
     url.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65`
     url.headers['Accept-Language'] = `zh-cn`
@@ -72,47 +77,51 @@ function sign() {
 
 cash()
 function cash() {
-    let url1 = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
+    let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
     headers: {Cookie:cookieVal}}
-    url1.headers['Connection'] = `keep-alive`
-    url1.headers['Content-Type'] = `application/json;charset=UTF-8`
-    url1.headers['Accept'] = `application/json, text/plain, */* `
-    url1.headers['Host'] = `nebula.kuaishou.com`
-    url1.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65`
-    url1.headers['Accept-Language'] = `zh-cn`
-    url1.headers['Accept-Encoding'] = `gzip, deflate, br`
-    url1.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4` 
-    sy.get(url1, (error, response, data) => {
-      //sy.log(`${cookieName}, data: ${data}`)
-      let result = JSON.parse(data)
-      const title = `${cookieName}`
-      let detail = ``
-     if (result.result == 1){
-       detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
-      } else if(result.result == 10901){
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
-      } else {
-        detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin} `
-      } 
-      sy.log(detail)
-     sy.msg(title, subTitle, detail)
-    })
+    url.headers['Connection'] = `keep-alive`
+    url.headers['Content-Type'] = `application/json;charset=UTF-8`
+    url.headers['Accept'] = `application/json, text/plain, */* `
+	url.headers['Host'] = `nebula.kuaishou.com`
+	url.headers['User-Agent'] = `Mozilla / 5.0(iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit / 605.1.15(KHTML, like Gecko) Mobile / 15E148 ksNebula / 2.1.3.65`
+	url.headers['Accept-Language'] = `zh - cn`
+	url.headers['Accept-Encoding'] = `gzip,deflate,br`
+	url.headers['Referer'] = `https: //nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4` 
+	sy.get(url, (error, response, data) =>{
+		//sy.log(`${cookieName}, data: ${data}`)
+		let result = JSON.parse(data) 
+		const title = `${cookieName}`
+		let detail = ``
+		if (result.result == 1) {
+			detail = `现金收益: ${result.data.allCash}元  金币收益: ${result.data.totalCoin}`
+		} else if (result.result == 10901) {
+			detail = `现金收益: ${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+			} else {
+			detail = `现金收益: ${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+		}
+		sy.log(detail) 
+		sy.msg(title, subTitle, detail)
+	})
+}
 
-  }
-    
-Popup()
+Popup() 
 function Popup() {
-    let url1 = {url:'https://nebula.kuaishou.com/rest/n/nebula/sign/query',
-    headers: {Cookie:cookieVal}}
-    url1.headers['Connection'] = `keep-alive`
-    url1.headers['Content-Type'] = `application/json;charset=UTF-8`
-    url1.headers['Accept'] = `application/json, text/plain, */* `
-    url1.headers['Host'] = `nebula.kuaishou.com`
-    url1.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65`
-    url1.headers['Accept-Language'] = `zh-cn`
-    url1.headers['Accept-Encoding'] = `gzip, deflate, br`
-    url1.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4` 
-    sy.get(url1, (error, response, data) => {
+	let url = {
+		url: 'https://nebula.kuaishou.com/rest/n/nebula/sign/query',
+		headers: {
+			Cookie: cookieVal
+		}
+	}
+	url.headers['Connection'] = `keep - alive`
+	url.headers['Content-Type'] = `application / json;
+	charset = UTF - 8`
+	url.headers['Accept'] = `application / json,text / plain,*/* `
+    url.headers['Host'] = `nebula.kuaishou.com`
+    url.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65`
+    url.headers['Accept-Language'] = `zh-cn`
+    url.headers['Accept-Encoding'] = `gzip, deflate, br`
+    url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4` 
+    sy.get(url, (error, response, data) => {
       //sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       const title = `${cookieName}`

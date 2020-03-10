@@ -16,7 +16,7 @@ function sign() {
     url.headers['Referer'] = `https://daojia.jd.com/taroh5/h5dist/`
    
     chen.get(url, (error, response, data) => {
-      chen.log(`${cookieName}, data: ${data}`)
+      //chen.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       
       const title = `${cookieName}`
