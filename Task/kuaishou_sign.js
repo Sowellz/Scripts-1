@@ -55,7 +55,7 @@ function sign() {
       let detail = ``
       if (result.result == 1) {
         subTitle = `${result.data.toast}`
-        detail = `获取金币收益: ${result.data.totalCoin}`
+        detail = `累计金币收益: ${result.data.totalCoin}`
       } else if(result.result == 10007){
         subTitle = `签到结果: ${result.error_msg}`
       } else if(result.result == 10901){
@@ -66,6 +66,7 @@ function sign() {
       } 
       sy.log(subTitle)
      sy.msg(title,subTitle,detail)
+     //sy.msg(title,subTitle,detail)
   })
 }
 
@@ -94,11 +95,38 @@ function cash() {
         detail = `现金收益:${result.data.allCash}元 金币收益: ${result.data.totalCoin} `
       } 
       sy.log(detail)
-     //sy.msg(title, subTitle, detail)
+     sy.msg(title, subTitle, detail)
     })
-    sy.done()
+
   }
     
+Popup()
+function Popup() {
+    let url1 = {url:'https://nebula.kuaishou.com/rest/n/nebula/sign/query',
+    headers: {Cookie:cookieVal}}
+    url1.headers['Connection'] = `keep-alive`
+    url1.headers['Content-Type'] = `application/json;charset=UTF-8`
+    url1.headers['Accept'] = `application/json, text/plain, */* `
+    url1.headers['Host'] = `nebula.kuaishou.com`
+    url1.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65`
+    url1.headers['Accept-Language'] = `zh-cn`
+    url1.headers['Accept-Encoding'] = `gzip, deflate, br`
+    url1.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4` 
+    sy.get(url1, (error, response, data) => {
+      //sy.log(`${cookieName}, data: ${data}`)
+      let result = JSON.parse(data)
+      const title = `${cookieName}`
+      let detail = ``
+     if (result.result == 1){
+       detail = `${result.data.nebulaSignInPopup.subTitle},${result.data.nebulaSignInPopup.title}`
+      } else {
+        detail = `失败:${result.error._msg}`
+      } 
+      sy.log(detail)
+     //sy.msg(title, subTitle, detail)
+    })
+  }
+sy.done()
 function init() {
     isSurge = () => {
       return undefined === this.$httpClient ? false : true
