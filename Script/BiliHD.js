@@ -17,28 +17,9 @@ const path3 = "/web-interface/nav\?";
 if (url.indexOf(path1) != -1) {
     let obj = JSON.parse(body);   
     obj["has_paid"] = true;
-    obj["accept_description"] = [
-  "高清 1080P+",
-  "高清 1080P",
-  "高清 720P",
-  "清晰 480P",
-  "流畅 360P"
- ];
-    obj["vip_type"] = 2;
-    obj["accept_quality"] = [
-  112,
-  80,
-  64,
-  32,
-  16
- ];
-    obj["vip_status"] = 1;
-    obj["video_project"] = true;
-    obj["type"] = "DASH";
-    obj["quality"] = obj["accept_quality"][0];
-    obj["format"] = "hdflv2";
-    obj["accept_format"] =       "hdflv2,flv,flv720,flv480,mp4";
-   
+	obj["quality"] = obj["accept_quality"][0];
+	obj.vip_type = 2;
+	obj.vip_status = 1;
  	body = JSON.stringify(obj);  
  };
 
