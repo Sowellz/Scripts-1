@@ -57,10 +57,11 @@ function sign() {
       sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       let subTitle = ``
-      if (result.result == 1) {
-        subTitle = `${result.data.toast} ${result.data.totalCoin}`
-      } else if(result.result == 10007){
+      if(result.result == 10007){
         subTitle = `签到结果: ${result.error_msg}`
+        sy.msg(title,subTitle,'')
+      } else if (result.data.status == 2) {
+        subTitle = `${result.data.toast} ${result.data.totalCoin}`
         sy.msg(title,subTitle,'')
       } 
         else {
@@ -115,11 +116,10 @@ function cash() {
 	  if (result.result == 1) {
 	        subTitle = `签到结果:今日已签到`
 			detail = `金币收益💰: ${result.data.totalCoin}   现金收益💵: ${result.data.allCash}元`
+			sy.msg(title,subTitle,detail)
 			} else {
-			detail = ``
 		}
-		sy.log(title,detail)
-	    sy.msg(title,subTitle,detail)
+	    sy.log(title,subTitle,detail)
 	})
    }
    sy.done()
