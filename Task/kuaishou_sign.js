@@ -65,7 +65,35 @@ function sign() {
       } 
         else {
       }
+
   })
+Popup() 
+function Popup() {
+	let url = {
+		url: 'https://nebula.kuaishou.com/rest/n/nebula/sign/query',
+		headers: {
+			Cookie: cookieVal
+		}
+	}
+	url.headers['Connection'] = `keep - alive`
+	url.headers['Content-Type'] = `application / json;
+	charset = UTF - 8`
+	url.headers['Accept'] = `application / json,text / plain,*/* `
+    url.headers['Host'] = `nebula.kuaishou.com`
+    url.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65`
+    url.headers['Accept-Language'] = `zh-cn`
+    url.headers['Accept-Encoding'] = `gzip, deflate, br`
+    url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4` 
+    sy.get(url, (error, response, data) => {
+      sy.log(`${cookieName}, data: ${data}`)
+      let result = JSON.parse(data)
+      let detail = ``
+     if (result.data.nebulaSignInPopup.todaySigned == true){
+       detail = `签到成功, ${result.data.nebulaSignInPopup.subTitle},${result.data.nebulaSignInPopup.title}`
+       sy.msg(title,'',detail)
+      } else {
+      } 
+    })
 
 cash()
 function cash() {
@@ -93,39 +121,9 @@ function cash() {
 		sy.log(title,detail)
 	    sy.msg(title,subTitle,detail)
 	})
-}
-sy.done()
-}
-  
-  Popup() 
-function Popup() {
-	let url = {
-		url: 'https://nebula.kuaishou.com/rest/n/nebula/sign/query',
-		headers: {
-			Cookie: cookieVal
-		}
-	}
-	url.headers['Connection'] = `keep - alive`
-	url.headers['Content-Type'] = `application / json;
-	charset = UTF - 8`
-	url.headers['Accept'] = `application / json,text / plain,*/* `
-    url.headers['Host'] = `nebula.kuaishou.com`
-    url.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ksNebula/2.1.3.65`
-    url.headers['Accept-Language'] = `zh-cn`
-    url.headers['Accept-Encoding'] = `gzip, deflate, br`
-    url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4` 
-    sy.get(url, (error, response, data) => {
-      //sy.log(`${cookieName}, data: ${data}`)
-      let result = JSON.parse(data)
-      let detail = ``
-     if (result.result == 1){
-       detail = `${result.data.nebulaSignInPopup.subTitle},${result.data.nebulaSignInPopup.title}`
-      } else {
-        detail = `失败:${result.error._msg}`
-      } 
-      //sy.log(detail)
-     //sy.msg(title, subTitle, detail)
-    })
+   }
+   sy.done()
+  }
 }
 
 function init() {
