@@ -34,6 +34,7 @@ QX or Surge MITM = nebula.kuaishou.com
 const cookieName = '快手极速版'
 const cookieKey = 'cookie_ks'
 const sy = init() 
+const title = `${cookieName}`
 const cookieVal = sy.getdata(cookieKey);
 sign() 
 function sign() {
@@ -53,27 +54,18 @@ function sign() {
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Referer'] = `https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4`
     sy.get(url, (error, response, data) => {
-      //sy.log(`${cookieName}, data: ${data}`)
+      sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
-     const title = `${cookieName}`
       let subTitle = ``
-      let detail = ``
       if (result.result == 1) {
-        subTitle = `${result.data.toast}`
-        detail = `累计金币收益: ${result.data.totalCoin}`
+        subTitle = `${result.data.toast} ${result.data.totalCoin}`
       } else if(result.result == 10007){
         subTitle = `签到结果: ${result.error_msg}`
-      } else if(result.result == 10901){
-        subTitle = `签到结果: 今日已签到`
-        detail = '(说明：获取当日收益情况请看日志)'
-      } else {
-        subTitle = `签到结果: 未知`
+        sy.msg(title,subTitle,'')
       } 
-      sy.log(subTitle)
-     sy.msg(title,subTitle,detail)
-     //sy.msg(title,subTitle,detail)
+        else {
+      }
   })
-}
 
 cash()
 function cash() {
@@ -90,21 +82,22 @@ function cash() {
 	sy.get(url, (error, response, data) =>{
 		//sy.log(`${cookieName}, data: ${data}`)
 		let result = JSON.parse(data) 
-		const title = `${cookieName}`
+        let subTitle = ``
 		let detail = ``
-		if (result.result == 1) {
-			detail = `现金收益: ${result.data.allCash}元  金币收益: ${result.data.totalCoin}`
-		} else if (result.result == 10901) {
-			detail = `现金收益: ${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+	  if (result.result == 1) {
+	        subTitle = `签到结果:今日已签到`
+			detail = `金币收益💰: ${result.data.totalCoin}   现金收益💵: ${result.data.allCash}元`
 			} else {
-			detail = `现金收益: ${result.data.allCash}元 金币收益: ${result.data.totalCoin}`
+			detail = ``
 		}
-		sy.log(detail) 
-		sy.msg(title, subTitle, detail)
+		sy.log(title,detail)
+	    sy.msg(title,subTitle,detail)
 	})
 }
-
-Popup() 
+sy.done()
+}
+  
+  Popup() 
 function Popup() {
 	let url = {
 		url: 'https://nebula.kuaishou.com/rest/n/nebula/sign/query',
@@ -124,18 +117,17 @@ function Popup() {
     sy.get(url, (error, response, data) => {
       //sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
-      const title = `${cookieName}`
       let detail = ``
      if (result.result == 1){
        detail = `${result.data.nebulaSignInPopup.subTitle},${result.data.nebulaSignInPopup.title}`
       } else {
         detail = `失败:${result.error._msg}`
       } 
-      sy.log(detail)
+      //sy.log(detail)
      //sy.msg(title, subTitle, detail)
     })
-  }
-sy.done()
+}
+
 function init() {
     isSurge = () => {
       return undefined === this.$httpClient ? false : true
