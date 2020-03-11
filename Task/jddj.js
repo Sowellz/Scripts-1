@@ -6,14 +6,6 @@ sign()
 function sign() {
     let url = {url: 'https://daojia.jd.com/client?functionId=signin%2FuserSigninNew&body=%7B%7D',
     headers: {Cookie:cookieVal}}
-    url.headers['Connection'] = `keep-alive`
-    url.headers['Content-Type'] = `application/x-www-form-urlencoded;charset=UTF-8`
-    url.headers['Accept'] = `*/*`
-    url.headers['Host'] = `daojia.jd.com`
-    url.headers['User-Agent'] = `Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 application=JDJR-App&deviceld=D6B42097-7660-464C-AE01-E5A3CFB2F788&clientType=ios`
-    url.headers['Accept-Language'] = `zh-cn`
-    url.headers['Accept-Encoding'] = `gzip, deflate, br`
-    url.headers['Referer'] = `https://daojia.jd.com/taroh5/h5dist/`
    
     chen.get(url, (error, response, data) => {
       //chen.log(`${cookieName}, data: ${data}`)
@@ -24,24 +16,51 @@ function sign() {
       let detail = ``
     
       if (result.code == 0) {
-        subTitle = `签到结果:   成功`
+        subTitle = `签到结果: 成功`
         detail = `获取鲜豆：${result.result.points}`
-      } else if (result.code == -1) {
-        subTitle = `签到结果: 重复签到`
-        detail = `说明: ${result.msg}`
-      }
-      else if(result.code==202){
+        chen.msg(title, subTitle, detail)
+      } else if(result.code==201){
         subTitle = `签到结果: 失败`
         detail = `说明: 未登录`
+        chen.msg(title, subTitle, detail)
+        
       } else {
-        subTitle = `签到结果: 未知`
-        detail = `说明: ${result.msg}`
+      
       }
-      chen.msg(title, subTitle, detail)
-      chen.log(`${result.totalBalanceAmount}`)
+      //chen.log(`${result.totalBalanceAmount}`)
+    })
+   chen.done()
+var time = `${new Date().getTime()}`
+ 
+points()
+function points() {
+    let url = {url: 'https://daojia.jd.com/client?_jdrandom=${time+1}&functionId=signin%2FshowSignInMsgNew&isNeedDealError=true&body=%7B%22cityId%22%3A1607%2C%22platform%22%3A4%2C%22longitude%22%3A114.30774%2C%22latitude%22%3A22.703693%2C%22source%22%3A%22H5%22%7D&lat=22.703693&lng=114.30774&lat_pos=22.703693&lng_pos=114.30774&city_id=1607&deviceToken=H5_DEV_CDCCA1FA-89AB-4A36-82F0-92861F7E6E43&deviceId=H5_DEV_CDCCA1FA-89AB-4A36-82F0-92861F7E6E43&channel=&platform=6.6.0&platCode=h5&appVersion=6.6.0&appName=paidaojia&deviceModel=appmodel&traceId=H5_DEV_CDCCA1FA-89AB-4A36-82F0-92861F7E6E43${time}',
+    headers: {Cookie:cookieVal}}
+   
+    chen.get(url, (error, response, data) => {
+      chen.log(`${cookieName}, data: ${data}`)
+      let result = JSON.parse(data)
+      
+      const title = `${cookieName}`
+      let subTitle = ``
+      let detail = ``
+    
+      if (result.code == 0) {
+        subTitle = `签到结果: 重复`
+        detail = `鲜豆个数：${result.result.userInfoResponse.points}  ${result.result.sevenDaysRewardResponse.tomorrowSingInRewardText} ${result.result.sevenDaysRewardResponse.alreadySignInDays}`
+        chen.msg(title, subTitle, '')
+      } else {
+      
+      }
+      //chen.log(title, subTitle, detail)
     })
     chen.done()
     }
+}
+
+
+
+
 
   function init() {
     isSurge = () => {
