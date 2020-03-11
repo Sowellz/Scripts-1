@@ -44,19 +44,15 @@ function sign() {
 		}
 	}
     sy.get(url, (error, response, data) => {
-      sy.log(`${cookieName}, data: ${data}`)
+      //sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       let subTitle = ``
       if(result.result == 10007){
         subTitle = `签到结果: ${result.error_msg}`
         sy.msg(title,subTitle,'')
-      } else if (result.data.status == 2) {
-        subTitle = `${result.data.toast} ${result.data.totalCoin}`
-        sy.msg(title,subTitle,'')
       } 
         else {
       }
-
   })
 Popup() 
 function Popup() {
@@ -67,12 +63,18 @@ function Popup() {
 		}
 	}
     sy.get(url, (error, response, data) => {
-      sy.log(`${cookieName}, data: ${data}`)
+      //sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       let detail = ``
-     if (result.data.nebulaSignInPopup.todaySigned == true){
-       detail = `签到成功, ${result.data.nebulaSignInPopup.subTitle},${result.data.nebulaSignInPopup.title}`
-       sy.msg(title,'',detail)
+      let subTitle = ``
+     if (result.data.status == 2){ 
+       subTitle = `签到成功: ${result.data.nebulaSignInPopup.subTitle}`
+       detail = `${result.data.nebulaSignInPopup.title}金币总收益:${result.data.totalCoin}`
+       sy.msg(title,subTitle,detail)
+      } else if (result.result == 1){ 
+       subTitle = `签到成功: ${result.data.nebulaSignInPopup.subTitle}`
+       detail = `${result.data.nebulaSignInPopup.title}`
+       sy.msg(title,subTitle,detail)
       } else {
       } 
     })
@@ -82,8 +84,10 @@ function cash() {
     let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
     headers: {Cookie:cookieVal}
    }
+   
 	sy.get(url, (error, response, data) =>{
 		//sy.log(`${cookieName}, data: ${data}`)
+		sy.log(cookieKey)
 		let result = JSON.parse(data) 
         let subTitle = ``
 		let detail = ``
@@ -91,11 +95,11 @@ function cash() {
 	        subTitle = `签到结果:今日已签到`
 			detail = `金币收益💰: ${result.data.totalCoin}   现金收益💵: ${result.data.allCash}元`
 			sy.msg(title,subTitle,detail)
+			sy.log(title,subTitle,detail)
 			} else {
-		}
-	    sy.log(title,subTitle,detail)
-	})
-   }
+		   } 
+	    })
+      }
    sy.done()
   }
 }
