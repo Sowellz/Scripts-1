@@ -3,14 +3,13 @@
 获取Cookie方法:
 1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
 下，
-2.APP登陆账号后，点击'钱包',即可获取Cookie.
+2.APP登陆账号后，点击'红包',即可获取Cookie.
 
 仅测试Quantumult x，Surge、Loon自行测试
 by Macsuny
 感谢
 @Chavy
 @Nobyda
-本人为初学者，专业问题请向大佬请教
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
 [Script]
