@@ -35,8 +35,8 @@ task
 0 0 * * * jddj.js
 
 */
-const CookieName = '京东到家'
-const CookieKey = 'sy_cookie_dj'
+const CookieName = '美团'
+const CookieKey = 'cookie_mt'
 const sy = init()
 GetCookie();
 

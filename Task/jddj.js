@@ -1,14 +1,14 @@
 const cookieName ='京东到家'
-const cookieKey = 'chen_cookie_dj'
-const chen = init()
-const cookieVal = chen.getdata(cookieKey);
+const cookieKey = 'sy_cookie_dj'
+const sy = init()
+const cookieVal = sy.getdata(cookieKey);
 sign()
 function sign() {
     let url = {url: 'https://daojia.jd.com/client?functionId=signin%2FuserSigninNew&body=%7B%7D',
     headers: { Cookie:cookieVal}}
    
-    chen.get(url, (error, response, data) => {
-      chen.log(`${cookieName}, data: ${data}`)
+    sy.get(url, (error, response, data) => {
+      sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       
       const title = `${cookieName}`
@@ -20,7 +20,7 @@ function sign() {
         detail = `获取鲜豆：${result.result.points}`
       } else if(result.code==201){
         subTitle = `签到结果: 失败`
-        detail = `说明: 未登录`
+        detail = `说明: ${result.msg}`
       } else if(result.code==-1){
         subTitle = `签到结果：重复签到`
         detail = `说明: ${result.msg}`
@@ -28,10 +28,10 @@ function sign() {
         subTitle = `签到结果: 未知`
         detail = `说明: ${result.msg}`
       }
-      chen.msg(title, subTitle, detail)
-      chen.log(`返回结果代码:${result.code}，返回信息:${result.msg}`)
+      sy.msg(title, subTitle, detail)
+      sy.log(`返回结果代码:${result.code}，返回信息:${result.msg}`)
     })
-    chen.done()
+    sy.done()
     }
 
   function init() {
