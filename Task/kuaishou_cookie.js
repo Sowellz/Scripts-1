@@ -47,7 +47,7 @@ function GetCookie() {
           sy.log(`[${CookieName}] 获取Cookie: 失败`);
         } else {
           sy.msg("更新" + CookieName + "Cookie成功 🎉", "", "");
-          sy.log(`[${CookieName}] 获取Cookie: 成功, Cookie: ${CookieValue}`)
+          //sy.log(`[${CookieName}] 获取Cookie: 成功, Cookie: ${CookieValue}`)
         }
       }
     } else {

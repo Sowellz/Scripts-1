@@ -78,7 +78,7 @@ function Popup() {
       } else {
       } 
     })
-
+    
 cash()
 function cash() {
     let url = {url:'https://nebula.kuaishou.com/rest/n/nebula/activity/earn/overview',
@@ -87,7 +87,6 @@ function cash() {
    
 	sy.get(url, (error, response, data) =>{
 		//sy.log(`${cookieName}, data: ${data}`)
-		sy.log(cookieKey)
 		let result = JSON.parse(data) 
         let subTitle = ``
 		let detail = ``
@@ -95,7 +94,7 @@ function cash() {
 	        subTitle = `签到结果:今日已签到`
 			detail = `金币收益💰: ${result.data.totalCoin}   现金收益💵: ${result.data.allCash}元`
 			sy.msg(title,subTitle,detail)
-			sy.log(title,subTitle,detail)
+			//sy.log(title,subTitle,detail)
 			} else {
 		   } 
 	    })
@@ -103,6 +102,7 @@ function cash() {
    sy.done()
   }
 }
+
 
 function init() {
     isSurge = () => {
