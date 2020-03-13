@@ -1,72 +1,23 @@
-/*
+const cookieName = '美团'
+const tokenurlKey = 'chavy_tokenurl_meituan'
+const tokenheaderKey = 'chavy_tokenheader_meituan'
+const signurlKey = 'chavy_signurl_meituan'
+const signheaderKey = 'chavy_signheader_meituan'
+const signbodyKey = 'chavy_signbody_meituan'
+const chavy = init()
 
-> 感谢 [@barry](https://t.me/barrymchen) 编写
-> 
-> 感谢 [@GideonSenku](https://github.com/GideonSenku) 对代码优化
-本脚本是在以上两位的基础上进行的小小修改
-本脚本仅适用于京东到家签到及获取鲜豆
-获取Cookie方法:
-1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
-下，
-2.APP登陆账号后，点击首页'签到',即可获取Cookie.
-
-仅测试Quantumult x，Surge、Loon自行测试
-by Macsuny
-
-~~~~~~~~~~~~~~~~
-Surge 4.0 :
-[Script]
-cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/jddj.js
-# 获取京东到家 Cookie.
-http-request https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}&functionId=%2Fsignin,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/jddj_cookie.js
-~~~~~~~~~~~~~~~~
-QX 1.0.5 :
-[task_local]
-0 9 * * * jddj.js
-
-[rewrite_local]
-# Get jddj cookie. QX 1.0.5(188+):
-https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}&functionId=%2Fsignin url script-request-header jddj_cookie.js
-~~~~~~~~~~~~~~~~
-QX or Surge MITM = daojia.jd.com
-~~~~~~~~~~~~~~~~
-
-task
-0 0 * * * jddj.js
-
-*/
-const CookieName = '美团'
-const CookieKey = 'cookie_mt'
-const sy = init()
-GetCookie();
-
-function GetCookie() {
-  if ($request.headers) {
-    var CookieValue = $request.headers['Cookie'];
-    
-    if (sy.getdata(CookieKey) != (undefined || null)) {
-      if (sy.getdata(CookieKey) != CookieValue) {
-        var cookie = sy.setdata(CookieValue, CookieKey);
-        if (!cookie) {
-          sy.msg("更新" + CookieName + "Cookie失败‼️", "", "");
-          sy.log(`[${CookieName}] 获取Cookie: 失败`);
-        } else {
-          sy.msg("更新" + CookieName + "Cookie成功 🎉", "", "");
-      sy.log(`[${CookieName}] 获取Cookie: 成功, Cookie: ${CookieValue}`)
-        }
-      }
-    } else {
-      var cookie = sy.setdata(CookieValue, CookieKey);
-      if (!cookie) {
-        sy.msg("首次写入" + CookieName + "Cookie失败‼️", "", "");
-      } else {
-        sy.msg("首次写入" + CookieName + "Cookie成功 🎉", "", "");
-      }
-    }
-  } else {
-    sy.msg("写入" + CookieName + "Cookie失败‼️", "", "配置错误, 无法读取请求头, ");
-  }
+const requrl = $request.url
+if ($request && $request.method != 'OPTIONS' && requrl.match(/\/evolve\/signin\/signpost\//)) {
+  const signurlVal = requrl
+  const signheaderVal = JSON.stringify($request.headers)
+  const signbodyVal = $request.body
+  if (signurlVal) chavy.setdata(signurlVal, signurlKey)
+  if (signheaderVal) chavy.setdata(signheaderVal, signheaderKey)
+  if (signbodyVal) chavy.setdata(signbodyVal, signbodyKey)
+  chavy.msg(cookieName, `获取Cookie: 成功`, ``)
+  chavy.log(signurlVal,signheaderVal,signBodyVal
 }
+
 function init() {
   isSurge = () => {
     return undefined === this.$httpClient ? false : true
@@ -110,4 +61,4 @@ function init() {
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
 }
-sy.done()
+chavy.done()

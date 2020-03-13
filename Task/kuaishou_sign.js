@@ -62,7 +62,7 @@ function sign() {
 		}
 	}
     sy.get(earnurl, (error, response, data) => {
-      sy.log(`${cookieName}, data: ${data}`)
+      //sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
      if (result.data.nebulaSignInPopup.button == '立即签到'){ 
        subTitle = `签到成功: ${result.data.nebulaSignInPopup.subTitle}, ${result.data.nebulaSignInPopup.title}`

@@ -37,6 +37,7 @@ function sign() {
       detail = `编码: ${result.code}, 说明: ${result.msg}`
     }
     chavy.msg(cookieName, subTitle, detail)
+    chavy.log(rinfo)
     chavy.done()
   })
 }
