@@ -65,7 +65,7 @@ function sign() {
       sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
      if (result.data.nebulaSignInPopup.button == '立即签到'){ 
-       subTitle = `签到成功: ${result.data.nebulaSignInPopup.subTitle} ${result.data.nebulaSignInPopup.title}`
+       subTitle = `签到成功: ${result.data.nebulaSignInPopup.subTitle}, ${result.data.nebulaSignInPopup.title}`
       } else if (result.data.nebulaSignInPopup.button == '好的'){ 
        subTitle = `重复签到: ${result.data.nebulaSignInPopup.subTitle}, ${result.data.nebulaSignInPopup.title}`
       }
