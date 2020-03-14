@@ -1,20 +1,15 @@
 const cookieName = '淘宝特价版'
 const signurlKey = 'sy_signurl_tjb'
 const signheaderKey = 'sy_signheader_tjb'
-//const signbodyKey = 'sy_signbody_tjb'
 const sy = init()
-
 const requrl = $request.url
 if ($request && $request.method != 'OPTIONS') {
   const signurlVal = requrl
   const signheaderVal = JSON.stringify($request.headers)
-  //const signbodyVal = $request.body
   sy.log(`signurlVal:${signurlVal}`)
   sy.log(`signheaderVal:${signheaderVal}`)
-  //sy.log(`signbodyVal:${signbodyVal}`)
   if (signurlVal) sy.setdata(signurlVal, signurlKey)
   if (signheaderVal) sy.setdata(signheaderVal, signheaderKey)
-  //if (signbodyVal) sy.setdata(signbodyVal, signbodyKey)
   sy.msg(cookieName, `获取Cookie: 成功`, ``)
 }
 

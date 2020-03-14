@@ -1,38 +1,33 @@
 const cookieName = '淘宝特价版'
-//const signurlKey = 'senku_signurl_pandeng'
-//const signheaderKey = 'senku_signheader_pandeng'
 const signurlKey = 'sy_signurl_tjb'
 const signheaderKey = 'sy_signheader_tjb'
-//const signbodyKey = 'sy_signbody_tjb'
 const sy = init()
 const signurlVal = sy.getdata(signurlKey)
 const signheaderVal = sy.getdata(signheaderKey)
-//const signBodyVal = sy.getdata(signbodyKey)
 
 sign()
-
 function sign() {
-  const url = { url: signurlVal, headers: signheaderVal}
-   url.headers['x-pv'] = `6.3`
-   url.headers['x-app-conf-v'] = `1`
-   
-   
-  sy.post(url, (error, response, data) => {
+return new Promise((resolve, reject) => {
+    const url = { url: signurlVal, headers: JSON.parse(signheaderVal)}
+    sy.post(url, (error, response, data) => {
     sy.log(`${cookieName}, data: ${data}`)
     const res = JSON.parse(data)
     let subTitle = ``
     let detail = ``
     if (res.status == 200) {
       subTitle = `签到结果: 成功`
-      //detail = `状态: ${res.ret}`
+      detail = `状态: ${res.ret}`
     } else {
       subTitle = `签到结果: 失败`
-      detail = `状态: ${res.message}`
-    }
+      detail = `状态: ${res.ret}`
+      }
+     })
     sy.msg(cookieName, subTitle, detail)
-    sy.done()
+    sy.log(cookieName, subTitle, detail)
   })
+  sy.done()
 }
+
 
 function init() {
   isSurge = () => {
