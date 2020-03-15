@@ -5,14 +5,14 @@ QX：
 Surge & QX MITM = guide-acs.m.taobao.com
 */
 　　let obj = JSON.parse($response.body);
-             obj.data["times"]="0";
-             obj.data["targetUrl"]= "";
-             obj.data["gmtEndMs"]="";
-             obj.data["durationTime"]="0";
-　　          obj.data["imageUrlForiOSX"]="";
-             obj.data["imageUrlForiOSXR"]="";
-　　          obj.data["imageUrlForiOSNormal"]="";
-             obj.data["imageUrlForAndroidLong"]="";
-             obj.data["imageUrlForAndroidNormal"]="";
+        obj.data["times"]="0";
+        obj.data["targetUrl"]= "";
+        obj.data["gmtEndMs"]= "";
+        obj.data["durationTime"]= "0";
+　　     obj.data["imageUrlForiOSX"]= "";
+        obj.data["imageUrlForiOSXR"]= "";
+　　     obj.data["imageUrlForiOSNormal"]= "";
+        obj.data["imageUrlForAndroidLong"]="";
+        obj.data["imageUrlForAndroidNormal"] = "";
 　　$done({body: JSON.stringify(obj)});
 

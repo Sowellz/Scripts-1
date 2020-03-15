@@ -1,4 +1,4 @@
-let obj = <?xml version="1.0" encoding="UTF-8"?>
+let obj = '<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -17,7 +17,7 @@ let obj = <?xml version="1.0" encoding="UTF-8"?>
 	<key>vid</key>
 	<string>241EABC8-E595-491D-9E32-8D0598D7E9BE</string>
 </dict>
-</plist>
+</plist>';
 
 $done({body: obj});
 

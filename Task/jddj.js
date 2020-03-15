@@ -10,7 +10,6 @@ function sign() {
     sy.get(url, (error, response, data) => {
       sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
-      
       const title = `${cookieName}`
       let subTitle = ``
       let detail = ``

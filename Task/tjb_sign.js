@@ -1,4 +1,8 @@
 const cookieName = '淘宝特价版'
+
+//const signurlKey = 'senku_signurl_pandeng'
+//const signheaderKey = 'senku_signheader_pandeng'
+
 const signurlKey = 'sy_signurl_tjb'
 const signheaderKey = 'sy_signheader_tjb'
 const sy = init()
@@ -14,7 +18,7 @@ return new Promise((resolve, reject) => {
     const res = JSON.parse(data)
     let subTitle = ``
     let detail = ``
-    if (res.status == 200) {
+    if (res.status.code == 200) {
       subTitle = `签到结果: 成功`
       detail = `状态: ${res.ret}`
     } else {
