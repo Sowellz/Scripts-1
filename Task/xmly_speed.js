@@ -1,22 +1,33 @@
-const cookieName = '美团'
-const tokenurlKey = 'chavy_tokenurl_meituan'
-const tokenheaderKey = 'chavy_tokenheader_meituan'
-const signurlKey = 'chavy_signurl_meituan'
-const signheaderKey = 'chavy_signheader_meituan'
-const signbodyKey = 'chavy_signbody_meituan'
-const chavy = init()
+const cookieName = '喜马拉雅极速版'
+const signurlKey = 'sy_signurl_xmspeed'
+const signheaderKey = 'sy_signheader_xmspeed'
+const sy = init()
+const signurlVal = sy.getdata(signurlKey)
+const signheaderVal = sy.getdata(signheaderKey)
 
-const requrl = $request.url
-if ($request && $request.method != 'OPTIONS' && requrl.match(/\/evolve\/signin\/signpost\//)) {
-  const signurlVal = requrl
-  const signheaderVal = JSON.stringify($request.headers)
-  const signbodyVal = $request.body
-  if (signurlVal) chavy.setdata(signurlVal, signurlKey)
-  if (signheaderVal) chavy.setdata(signheaderVal, signheaderKey)
-  if (signbodyVal) chavy.setdata(signbodyVal, signbodyKey)
-  chavy.msg(cookieName, `获取Cookie: 成功`, ``)
-  chavy.log(signurlVal,signheaderVal,signBodyVal
+sign()
+function sign() {
+return new Promise((resolve, reject) => {
+    const url = { url: signurlVal, headers: JSON.parse(signheaderVal)}
+    sy.post(url, (error, response, data) => {
+    sy.log(`${cookieName}, data: ${data}`)
+    const res = JSON.parse(data)
+    let subTitle = ``
+    let detail = ``
+    if (res.status.code == 200) {
+      subTitle = `签到结果: 成功`
+      detail = `状态: ${res.ret}`
+    } else {
+      subTitle = `签到结果: 失败`
+      detail = `状态: ${res.ret}`
+      }
+     })
+    sy.msg(cookieName, subTitle, detail)
+    sy.log(cookieName, subTitle, detail)
+  })
+  sy.done()
 }
+
 
 function init() {
   isSurge = () => {
@@ -44,7 +55,7 @@ function init() {
     }
     if (isQuanX()) {
       url.method = 'GET'
-      $task.fetch(url).then((resp) => cb(null, {}, resp.body))
+      $task.fetch(url).then((resp) => cb(null, resp, resp.body))
     }
   }
   post = (url, cb) => {
@@ -53,7 +64,7 @@ function init() {
     }
     if (isQuanX()) {
       url.method = 'POST'
-      $task.fetch(url).then((resp) => cb(null, {}, resp.body))
+      $task.fetch(url).then((resp) => cb(null, resp, resp.body))
     }
   }
   done = (value = {}) => {
@@ -61,4 +72,3 @@ function init() {
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
 }
-chavy.done()

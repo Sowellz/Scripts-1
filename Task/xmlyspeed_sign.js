@@ -1,33 +1,17 @@
-const cookieName = '淘宝特价版'
-const signurlKey = 'sy_signurl_tjb'
-const signheaderKey = 'sy_signheader_tjb'
+const cookieName = '喜马拉雅极速版'
+const signurlKey = 'sy_signurl_xmspeed'
+const signheaderKey = 'sy_signheader_xmspeed'
 const sy = init()
-const signurlVal = sy.getdata(signurlKey)
-const signheaderVal = sy.getdata(signheaderKey)
-
-sign()
-function sign() {
-return new Promise((resolve, reject) => {
-    const url = { url: signurlVal, headers: JSON.parse(signheaderVal)}
-    sy.post(url, (error, response, data) => {
-    sy.log(`${cookieName}, data: ${data}`)
-    const res = JSON.parse(data)
-    let subTitle = ``
-    let detail = ``
-    if (res.status.code == 200) {
-      subTitle = `签到结果: 成功`
-      detail = `状态: ${res.ret}`
-    } else {
-      subTitle = `签到结果: 失败`
-      detail = `状态: ${res.ret}`
-      }
-     })
-    sy.msg(cookieName, subTitle, detail)
-    sy.log(cookieName, subTitle, detail)
-  })
-  sy.done()
+const requrl = $request.url
+if ($request && $request.method != 'OPTIONS') {
+  const signurlVal = requrl
+  const signheaderVal = JSON.stringify($request.headers)
+  sy.log(`signurlVal:${signurlVal}`)
+  sy.log(`signheaderVal:${signheaderVal}`)
+  if (signurlVal) sy.setdata(signurlVal, signurlKey)
+  if (signheaderVal) sy.setdata(signheaderVal, signheaderKey)
+  sy.msg(cookieName, `获取Cookie: 成功`, ``)
 }
-
 
 function init() {
   isSurge = () => {
@@ -55,7 +39,7 @@ function init() {
     }
     if (isQuanX()) {
       url.method = 'GET'
-      $task.fetch(url).then((resp) => cb(null, resp, resp.body))
+      $task.fetch(url).then((resp) => cb(null, {}, resp.body))
     }
   }
   post = (url, cb) => {
@@ -64,7 +48,7 @@ function init() {
     }
     if (isQuanX()) {
       url.method = 'POST'
-      $task.fetch(url).then((resp) => cb(null, resp, resp.body))
+      $task.fetch(url).then((resp) => cb(null, {}, resp.body))
     }
   }
   done = (value = {}) => {
@@ -72,3 +56,4 @@ function init() {
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
 }
+sy.done()
