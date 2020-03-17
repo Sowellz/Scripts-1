@@ -50,9 +50,9 @@ function sign() {
      if (result.success == true) {
       subTitle = `签到结果: 成功🎉`
       detail = `${result.data.topLine},${result.data.rewardName},获得京豆: ${result.data.jdBeanQuantity}`
-      } else if (result.data == null) {
+      } else if (result.errorMessage == `今天已经签到过了哦`) {
       subTitle = `签到结果: 重复`
-      detail = `说明: ${result.errorMessage}`
+      detail = `说明: ${result.errorMessage}!`
       } else  {
       subTitle = `签到结果: 失败`
       detail = `说明: ${result.errorMessage}`
