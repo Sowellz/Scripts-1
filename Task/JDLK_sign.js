@@ -47,7 +47,7 @@ function sign() {
       let detail = ``
       let subTitle = ``
    
-     if (result.signSuccess == true) {
+     if (result.success == true) {
       subTitle = `签到结果: 成功🎉`
       detail = `${result.data.topLine},${result.data.rewardName},获得京豆: ${result.data.jdBeanQuantity}`
       } else if (result.data == null) {
