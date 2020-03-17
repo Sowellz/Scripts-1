@@ -49,7 +49,7 @@ function sign() {
    
      if (result.signSuccess == true) {
       subTitle = `签到结果: 成功🎉`
-      detail = `${result.topLine},${result.rewardName},获得京豆: ${result.jdBeanQuantity}`
+      detail = `${result.data.topLine},${result.data.rewardName},获得京豆: ${result.data.jdBeanQuantity}`
       } else if (result.data == null) {
       subTitle = `签到结果: 重复`
       detail = `说明: ${result.errorMessage}`
