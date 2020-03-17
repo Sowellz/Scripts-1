@@ -50,7 +50,7 @@ function sign() {
      if (result.success == true) {
       subTitle = `签到结果: 成功🎉`
       detail = `${result.data.topLine},${res.data.rewardName},获得京豆: ${res.data.jdBeanQuantity}`
-      } else if (result.errorCode == 'B0001') {
+      } else if (result.data == null) {
       subTitle = `签到结果: 重复`
       detail = `说明: ${result.errorMessage}`
       } else  {
