@@ -3,13 +3,13 @@
 获取Cookie方法:
 1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
 下，
-2.微信搜索'来客有礼'小程序,登陆京东账号，点击'领京豆',即可获取Cookie.
+2.微信搜索'来客有礼'小程序,登陆京东账号，点击'领京豆->翻牌',即可获取Cookie.
 
-仅测试Quantumult x，Surge、Loon自行测试
+仅测试Quantumult x，Surge 无效
 by Macsuny
 
 ~~~~~~~~~~~~~~~~
-Surge 4.0 :
+Surge 4.0 :❌❌
 [Script]
 cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/JDLK_sign.js
 # 来客有礼 Cookie.
