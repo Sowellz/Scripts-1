@@ -77,7 +77,7 @@ function sign() {
 		//sy.log(`${cookieName}, data: ${data}`)
 		let result = JSON.parse(data) 
 	  if (result.result == 1) {
-	        detail = `现金收益: 💵${result.data.allCash}元    金币收益: 💰${result.data.totalCoin}     `
+	        detail = `现金收益: 💵${result.data.allCash}元    金币收益: 💰${result.data.totalCoin}`
 			sy.msg(title,subTitle,detail)
 			//sy.log(title,subTitle,detail)
 			} else {
