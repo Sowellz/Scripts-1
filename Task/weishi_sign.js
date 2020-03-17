@@ -9,7 +9,7 @@
 by Macsuny
 
 ~~~~~~~~~~~~~~~~
-Surge 4.0 :❌❌
+Surge 4.0 :
 [Script]
 cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/JDLK_sign.js
 # 来客有礼 Cookie.
@@ -26,9 +26,9 @@ QX or Surge MITM = draw.jdfcloud.com
 ~~~~~~~~~~~~~~~~
 
 */
-const cookieName = '京东来客有礼'
-const signurlKey = 'sy_signurl_lkyl'
-const signheaderKey = 'sy_signheader_lkyl'
+const cookieName = '腾讯微视'
+const signurlKey = 'sy_signurl_ws'
+const signheaderKey = 'sy_signheader_ws'
 const sy = init()
 const signurlVal = sy.getdata(signurlKey)
 const signheaderVal = sy.getdata(signheaderKey)
@@ -45,17 +45,17 @@ function sign() {
       let result = JSON.parse(data)
       const title = `${cookieName}`
       let detail = ``
-      let subTitle = ``
+      let subTitle = ''
    
-     if (result.signSuccess == true) {
+     if (result.ret == 0) {
       subTitle = `签到结果: 成功🎉`
-      detail = `${result.topLine},${result.rewardName},获得京豆: ${result.jdBeanQuantity}`
-      } else if (result.data == null) {
+      detail = `${result.data.mutiPrizeTitle},获得红包🧧${res.data.prizes.prize_desc}`
+      } else if (result.ret == -12014) {
       subTitle = `签到结果: 重复`
-      detail = `说明: ${result.errorMessage}`
+      detail = `说明: ${result.msg}`
       } else  {
       subTitle = `签到结果: 失败`
-      detail = `说明: ${result.errorMessage}`
+      detail = `说明: ${result.msg}`
       }
       sy.msg(title, subTitle, detail)
      })
