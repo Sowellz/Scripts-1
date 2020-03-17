@@ -13,7 +13,7 @@ Surge 4.0 :
 [Script]
 cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/JDLK_sign.js
 # 来客有礼 Cookie.
-http-request https:\/\/draw\.jdfcloud\.com\/\/api\/turncard\/sign\?,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/JDLK_cookie.js
+http-request https:\/\/draw\.jdfcloud\.com\/\/api\/turncard\/sign\? script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/JDLK_cookie.js
 ~~~~~~~~~~~~~~~~
 QX 1.0.5 :
 [task_local]
