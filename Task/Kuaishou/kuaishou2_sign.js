@@ -18,7 +18,7 @@ cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/ma
 # 获取快手极速版 Cookie.
 http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou_cookie.js
 ~~~~~~~~~~~~~~~~
-QX 1.0.5+ :
+QX 1.0.5 :
 [task_local]
 0 9 * * * kuaishou_sign.js
 
@@ -26,13 +26,12 @@ QX 1.0.5+ :
 # Get bilibili cookie. QX 1.0.5(188+):
 https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishou_cookie.js
 ~~~~~~~~~~~~~~~~
-[MITM]
-hostname = nebula.kuaishou.com
+QX or Surge MITM = nebula.kuaishou.com
 ~~~~~~~~~~~~~~~~
 
 */
 const cookieName = '快手极速版'
-const cookieKey = 'cookie_ks'
+const cookieKey = 'cookie_ks2'
 const sy = init() 
 const title = `${cookieName}`
 const cookieVal = sy.getdata(cookieKey);
