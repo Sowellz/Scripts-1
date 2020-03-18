@@ -62,7 +62,7 @@ function sign() {
       sy.msg(title, subTitle, detail)
      })
   }
-  sy.done()
+
 
 function init() {
   isSurge = () => {
