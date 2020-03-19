@@ -9,9 +9,10 @@ sign()
 function sign() {
 return new Promise((resolve, reject) => {
     const url = { url: signurlVal, headers: JSON.parse(signheaderVal)}
-    sy.post(url, (error, response, data) => {
+    sy.get(url, (error, response, data) => {
     sy.log(`${cookieName}, data: ${data}`)
-    const res = JSON.parse(data)
+    let res = JSON.parse(data)
+    const title = `${cookieName}`
     let subTitle = ``
     let detail = ``
     if (res.status.code == 200) {
@@ -22,8 +23,8 @@ return new Promise((resolve, reject) => {
       detail = `状态: ${res.ret}`
       }
      })
-    sy.msg(cookieName, subTitle, detail)
-    sy.log(cookieName, subTitle, detail)
+    sy.msg(title, subTitle, detail)
+    sy.log(title, subTitle, detail)
   })
   sy.done()
 }
