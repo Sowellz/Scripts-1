@@ -26,16 +26,16 @@ hostname = cmb-signpoint.weijuju.com
 const cookieName = '招商银行'
 const signurlKey = 'sy_signurl_cmb'
 const signheaderKey = 'sy_signheader_cmb'
+const signbodyKey = 'sy_signbody_cmb'
 const sy = init()
 const signurlVal = sy.getdata(signurlKey)
 const signheaderVal = sy.getdata(signheaderKey)
-
+const signBodyVal = sy.getdata(signbodyKey)
 sign()
 
 function sign() {
 	  let signurl = {
-		url: signurlVal,
-		headers: JSON.parse(signheaderVal)
+		url: signurlVal, headers: JSON.parse(signheaderVal), body: signBodyVal
 	}
     sy.post(signurl, (error, response, data) => {
       sy.log(`${cookieName}, data: ${data}`)
@@ -46,7 +46,7 @@ function sign() {
    
      if (result.retCode == 0) {
       subTitle = `签到结果: ${result.msg}🎉`
-      detail = `签到次数:${result.model.signDays}次,获得积分: ${result.point}分`
+      detail = `签到次数:${result.model.today}次,获得积分: ${result.point}分`
       } else if (result.retCode == 20100) {
       subTitle = `签到结果: 重复`
       detail = `说明: ${result.msg}!`
