@@ -1,5 +1,42 @@
-const CookieName = '京东商城3'
-const CookieKey = 'CookieJD3'
+/*
+
+> 感谢 [@barry](https://t.me/barrymchen) 编写
+> 
+> 感谢 [@GideonSenku](https://github.com/GideonSenku) 对代码优化
+本脚本是在以上两位的基础上进行的小小修改
+本脚本仅适用于京东到家签到及获取鲜豆
+获取Cookie方法:
+1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
+下，
+2.APP登陆账号后，点击首页'签到',即可获取Cookie.
+
+仅测试Quantumult x，Surge、Loon自行测试
+by Macsuny
+
+~~~~~~~~~~~~~~~~
+Surge 4.0 :
+[Script]
+cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/jddj.js
+# 获取京东到家 Cookie.
+http-request https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}&functionId=%2Fsignin,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/jddj_cookie.js
+~~~~~~~~~~~~~~~~
+QX 1.0.5 :
+[task_local]
+0 9 * * * jddj.js
+
+[rewrite_local]
+# Get jddj cookie. QX 1.0.5(188+):
+https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}&functionId=%2Fsignin url script-request-header jddj_cookie.js
+~~~~~~~~~~~~~~~~
+QX or Surge MITM = daojia.jd.com
+~~~~~~~~~~~~~~~~
+
+task
+0 0 * * * jddj.js
+
+*/
+const CookieName = '招商银行'
+const CookieKey = 'cookie_cmb'
 const sy = init()
 GetCookie();
 
@@ -15,7 +52,7 @@ function GetCookie() {
           sy.log(`[${CookieName}] 获取Cookie: 失败`);
         } else {
           sy.msg("更新" + CookieName + "Cookie成功 🎉", "", "");
-          sy.log(`[${CookieName}] 获取Cookie: 成功, Cookie: ${CookieValue}`)
+      sy.log(`[${CookieName}] 获取Cookie: 成功, Cookie: ${CookieValue}`)
         }
       }
     } else {
