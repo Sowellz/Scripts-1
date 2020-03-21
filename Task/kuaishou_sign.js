@@ -4,6 +4,7 @@
 1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
 下，
 2.APP登陆账号后，点击'红包',即可获取Cookie.
+3.当日签过到需次日获取Cookie.
 
 仅测试Quantumult x，Surge、Loon自行测试
 by Macsuny
