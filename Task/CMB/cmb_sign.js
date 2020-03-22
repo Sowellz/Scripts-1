@@ -37,7 +37,11 @@ function sign() {
 	  let signurl = {
 		url: signurlVal, headers: JSON.parse(signheaderVal), body: signBodyVal
 	}
+	//let responseheaders = `$response.headers`
+    //    responseheaders.server = `nginx/1.4.6 (Ubuntu)`
+	
     sy.post(signurl, (error, response, data) => {
+    
       sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       const title = `${cookieName}`
