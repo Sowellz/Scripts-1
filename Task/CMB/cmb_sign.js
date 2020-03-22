@@ -6,7 +6,7 @@
 2.打开'招商银行'APP,登陆，点击'首页的'我的积分'->签到',即可获取Cookie. 
 3.签过到等明天重新获取Cookie
 
-仅测试Quantumult x
+仅测试Quantumult X 不通过 无效
 by Macsuny
 
 ~~~~~~~~~~~~~~~~
@@ -16,7 +16,7 @@ QX 1.0.6+ :
 0 9 * * * cmb_sign.js
 
 [rewrite_local]
-https:\/\/cmb-signpoint\.weijuju\.com\/mobile\/sign url script-request-header cmb_cookie.js
+^https:\/\/cmb-signpoint\.weijuju\.com\/mobile\/sign$ url script-request-header cmb_cookie.js
 ~~~~~~~~~~~~~~~~
 [MITM]
 hostname = cmb-signpoint.weijuju.com
