@@ -1,4 +1,4 @@
-const cookieName = '樊登读书'
+const cookieName = '招商银行'
 const signurlKey = 'sy_signurl_cmb'
 const signheaderKey = 'sy_signheader_cmb'
 const signbodyKey = 'sy_signbody_cmb'

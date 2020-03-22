@@ -40,6 +40,14 @@ function sign() {
     sy.post(signurl, (error, response, data) => {
       sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
+      var modifiedHeaders = $response.headers
+      modifiedHeaders['Connection'] = 'keep-alive'
+      modifiedHeaders['Content-Encoding'] = 'gzip'
+      modifiedHeaders['Content-Type'] = 'application/json;charset=UTF-8'
+      modifiedHeaders['Server'] = 'nginx/1.4.6 (Ubuntu)'
+      modifiedHeaders['Transfer-Encoding'] = 'chunked'
+      modifiedHeaders['Vary'] = 'Accept-Encoding'
+            
       const title = `${cookieName}`
       let detail = ``
       let subTitle = ``
