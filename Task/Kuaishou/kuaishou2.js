@@ -16,24 +16,24 @@ Surge 4.0 :
 [Script]
 cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou_sign.js
 # 获取快手极速版 Cookie.
-http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou_cookie.js
+http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou2.js
 ~~~~~~~~~~~~~~~~
 QX 1.0.5 :
 [task_local]
-0 9 * * * kuaishou_sign.js
+0 9 * * * kuaishou2.js
 
 [rewrite_local]
 # Get bilibili cookie. QX 1.0.5(188+):
-https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishou_cookie.js
+https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishou2.js
 ~~~~~~~~~~~~~~~~
 QX or Surge MITM = nebula.kuaishou.com
 ~~~~~~~~~~~~~~~~
 
 */
-const CookieName = '快手'
+const CookieName = '快手极速2'
 const cookieKey = 'cookie_ks2'
-
 const sy = init()
+const cookieVal = sy.getdata(cookieKey);
 
 let isGetCookie = typeof $request !== 'undefined'
 
@@ -42,7 +42,6 @@ if (isGetCookie) {
 } else {
    sign()
 }
-
 
 function GetCookie() {
   if ($request.headers) {
@@ -73,13 +72,7 @@ function GetCookie() {
 sy.done
 }
 
-sign()
 function sign() {
-const cookieName = '快手'
-const cookieKey = 'cookie_ks2'
-const sy = init() 
-const title = `${cookieName}`
-const cookieVal = sy.getdata(cookieKey);
       let detail = ``
       let subTitle = ``
 	  let signurl = {
@@ -89,11 +82,11 @@ const cookieVal = sy.getdata(cookieKey);
 		}
 	}
     sy.get(signurl, (error, response, data) => {
-      sy.log(`${cookieName}, data: ${data}`)
+      //sy.log(`${cookieName}, data: ${data}`)
       let result = JSON.parse(data)
       if(result.result == 10007){
         subTitle = `签到结果: ${result.error_msg}`
-        sy.msg(title,subTitle,'')
+        sy.msg(CookieName,subTitle,'')
         sy.done()
       } else {
       } 
@@ -117,17 +110,17 @@ const cookieVal = sy.getdata(cookieKey);
     headers: {Cookie:cookieVal}
    }
 	sy.get(reurl, (error, response, data) =>{
-    //sy.log(`${cookieName}, data: ${data}`)
-	  let result = JSON.parse(data) 
+		//sy.log(`${cookieName}, data: ${data}`)
+		let result = JSON.parse(data) 
 	  if (result.result == 1) {
 	        detail = `现金收益: 💵${result.data.allCash}元    金币收益: 💰${result.data.totalCoin}`
-			sy.msg(title,subTitle,detail)
+			sy.msg(CookieName,subTitle,detail)
 			//sy.log(title,subTitle,detail)
 			} else {
 		   } 
 	    })
-         sy.done()
-       }
+      }
+   sy.done()
       
 
 function init() {
