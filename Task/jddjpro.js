@@ -15,9 +15,9 @@ function sign() {
       const title = `${cookieName}`
       let subTitle = ``
       let detail = ``
-      if (result.success&&res.result.points!='undefined') {
-       subTitle = `签到结果:   成功`
-       detail = `获取鲜豆：${result.result.points}`
+      if (result.success == true) {
+       subTitle = `签到结果:  成功`
+       detail = `获取鲜豆：${result.result.points}, ${result.result.couponResponse.couponTitle}${result.result.couponResponse.amount}元，${result.result.couponResponse.limitRule}，${result.result.couponResponse.availableDate}`
        sy.msg(title, subTitle, detail)
        sy.done()
     } else {
