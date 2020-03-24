@@ -24,7 +24,7 @@ QX 1.0.5 :
 
 [rewrite_local]
 # Get bilibili cookie. QX 1.0.5(188+):
-https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishousign.js
+https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishou_sign.js
 ~~~~~~~~~~~~~~~~
 QX or Surge MITM = nebula.kuaishou.com
 ~~~~~~~~~~~~~~~~
