@@ -29,7 +29,7 @@ function sign() {
 return new Promise((resolve, reject) => {
     const url = { url: signurlVal, headers: JSON.parse(signheaderVal)}
     sy.get(url, (error, response, data) => {
-    sy.log(`${cookieName}, data: ${data}`)
+    //sy.log(`${cookieName}, data: ${data}`)
     const result = JSON.parse(data)
     const title = `${cookieName}`
     let subTitle = ``
@@ -37,20 +37,34 @@ return new Promise((resolve, reject) => {
     if (result.errCode == 0) {
       subTitle = `签到结果: 成功`
       detail = `已签到 ${result.data.firstSign}天，获取金币${result.data.reward.count}[0]`
-    } else if (result.errCode == 4)
-      {
+      sy.msg(title, subTitle, detail)
+      sy.done()
+      }
+    let url = { url: `http://api.gaoqingdianshi.com/api/coin/info`, headers: JSON.parse(signheaderVal)}
+    sy.get(url, (error, response, data) => {
+    //sy.log(`${cookieName}, data: ${data}`)
+    const result = JSON.parse(data)
+    if (result.errCode == 0) {
       subTitle = `签到结果: 重复`
-      detail = `状态: ${result.msg}`
+      detail += `金币收益: ${result.data.coin}`
+      }
+     let url = { url: `http://api.gaoqingdianshi.com/api/cash/info`, headers: JSON.parse(signheaderVal)}
+    sy.get(url, (error, response, data) => {
+    //sy.log(`${cookieName}, data: ${data}`)
+    const result = JSON.parse(data)
+    if (result.errCode == 0) {
+      detail += `  现金收益: ${result.data.amount/100}元`
       } else { 
       subTitle = `签到结果: 失败`
       detail = `状态: ${result.msg}`
       }
-       sy.msg(title, subTitle, detail)
+      sy.msg(title, subTitle, detail)
       sy.done()
+      })
      })
-  })
+   })
+ })
 }
-
 function init() {
   isSurge = () => {
     return undefined === this.$httpClient ? false : true
