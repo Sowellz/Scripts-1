@@ -150,7 +150,7 @@ function ReadCookie() {
       }
       resolve('done')
     } else {
-      KEY = Key?Key:$nobyda.read("CookieJD2")
+      KEY = Key?Key:$nobyda.read("CookieJD3")
       if (KEY) {
         all()
       } else {
@@ -1787,7 +1787,7 @@ function JingDongFood(s) {
 function GetCookie() {
   var CookieName = "京东";
   if ($request.headers) {
-    var CookieKey = "CookieJD2";
+    var CookieKey = "CookieJD3";
     var CookieValue = $request.headers['Cookie'];
     if ($nobyda.read(CookieKey) != (undefined || null)) {
       if ($nobyda.read(CookieKey) != CookieValue) {

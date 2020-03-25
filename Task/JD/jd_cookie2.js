@@ -1,5 +1,5 @@
-const CookieName = '京东商城2'
-const CookieKey = 'CookieJD2'
+const CookieName = '京东商城3'
+const CookieKey = 'CookieJD3'
 const sy = init()
 GetCookie();
 
