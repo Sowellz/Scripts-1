@@ -87,8 +87,7 @@ function sign() {
      
       if (result.code == 0) {
        subTitle = `签到结果:  成功`
-       detail = `获取鲜豆：${result.result.points}`
-       sy.msg(title, subTitle, detail)
+       detail = `获取鲜豆：${result.result.points}` 
       }
      sy.done()
     })
