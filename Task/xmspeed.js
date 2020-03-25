@@ -1,14 +1,11 @@
 /*
 
-> 感谢 [@barry](https://t.me/barrymchen) 编写
-> 感谢 [@GideonSenku](https://github.com/GideonSenku) 对代码优化
-本脚本仅适用于京东到家签到及获取鲜豆
+本脚本仅适用于喜马拉雅极速版签到
 获取Cookie方法:
 1.将下方[rewrite_local]和[MITM]地址复制的相应的区域
 下，
-2.APP登陆账号后，点击首页'签到',即可获取Cookie.
+2.APP登陆账号后，点击右下角'福利'选项,即可获取Cookie.
 
-##3月25日10点修改:增加鲜豆信息，cookie、task二合一
 
 仅测试Quantumult x，Surge、Loon自行测试
 by Macsuny
@@ -16,28 +13,29 @@ by Macsuny
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
 [Script]
-cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/jddj.js
-# 获取京东到家 Cookie.
-http-request https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}&functionId=%2Fsignin,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/jddj.js
+cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/xmspeed.js
+# 获取喜马拉雅极速版 Cookie.
+http-request https:\/\/m\.ximalaya\.com\/speed\/task-center\/account\/coin,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/xmspeed.js
 ~~~~~~~~~~~~~~~~
-QX 1.0.5 :
+QX 1.0.6+ :
 [task_local]
-0 9 * * * jddj.js
+0 9 * * * xmspeed.js
 
 [rewrite_local]
-# Get jddj cookie. QX 1.0.5(188+):
-https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}&functionId=%2Fsignin url script-request-header jddj.js
+# Get cookie. QX 1.0.5(188+):
+https:\/\/m\.ximalaya\.com\/speed\/task-center\/account\/coin url script-request-header xmspeed.js
 ~~~~~~~~~~~~~~~~
-QX or Surge MITM = daojia.jd.com
+QX or Surge [MITM]
+hostname = m.ximalaya.com
 ~~~~~~~~~~~~~~~~
 
 task
-0 0 * * * jddj.js
+0 0 * * * xmspeed.js
 
 */
 
-const CookieName ='京东到家'
-const CookieKey = 'sy_cookie_dj'
+const CookieName ='喜马拉雅极速版'
+const CookieKey = 'sy_cookie_xmspeed'
 const sy = init()
 const cookieVal = sy.getdata(CookieKey);
 let isGetCookie = typeof $request !== 'undefined'
@@ -76,38 +74,27 @@ function GetCookie() {
 }
 
 function sign() {
-     const title = `${CookieName}`
+      const title = `${CookieName}`
       let subTitle = ``
       let detail = ``
-    let url = {url: 'https://daojia.jd.com/client?functionId=signin%2FuserSigninNew&body=%7B%7D',
+    let url = {url: 'https://m.ximalaya.com/speed/task-center/account/coin',
     headers: { Cookie:cookieVal}}   
+     
     sy.get(url, (error, response, data) => {
-      //sy.log(`${CookieName}, data: ${data}`)
-      let result = JSON.parse(data)     
-      if (result.code == 0) {
+    sy.log(`${CookieName}, data: ${data}`)
+      
+     if (data == ""){
+       subTitle = `签到失败: 配置缺失❌`
+       detail = '说明:请重新获取Cookie'
+     } else {
+     let result = JSON.parse(data) 
        subTitle = `签到结果:  成功`
-       detail = `获取鲜豆：${result.result.points}`  
-       sy.msg(title, subTitle, detail)
-      }     
-     sy.done()
-    })
-      let url2 = {url: `https://daojia.jd.com/client?functionId=signin%2FshowSignInMsgNew&body=%7B%7D`, headers: { Cookie:cookieVal}}   
-      sy.get(url2, (error, response, data) => {
-      sy.log(`${CookieName}, data: ${data}`)
-      let result = JSON.parse(data)
-      if (result.code != 0) {
-      subTitle = `签到结果: 失败`
-      detail = `说明: ${result.msg}`
-    } else if (result.result.userInfoResponse.hasSign == true) {
-        subTitle = `签到结果: 重复`
-        detail = `鲜豆总计：${result.result.userInfoResponse.points}   今日获取鲜豆:  ${result.result.sevenDaysRewardResponse.items[0].points}\n已签到${result.result.sevenDaysRewardResponse.alreadySignInDays}天，${result.result.sevenDaysRewardResponse.tomorrowSingInRewardText}`
-      } 
+       detail = `今日获取金币：${result.total}`
+      }  
       sy.msg(title, subTitle, detail)
-      sy.log(`返回结果代码:${result.code}，返回信息:${result.msg}`)
-     })
-   sy.done()
-  }
-
+    })
+    sy.done()
+}
  function init() {
     isSurge = () => {
       return undefined === this.$httpClient ? false : true
