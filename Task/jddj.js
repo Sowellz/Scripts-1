@@ -83,8 +83,7 @@ function sign() {
     headers: { Cookie:cookieVal}}   
     sy.get(url, (error, response, data) => {
       //sy.log(`${CookieName}, data: ${data}`)
-      let result = JSON.parse(data)
-     
+      let result = JSON.parse(data)     
       if (result.code == 0) {
        subTitle = `签到结果:  成功`
        detail = `获取鲜豆：${result.result.points}` 
@@ -105,6 +104,7 @@ function sign() {
       sy.msg(title, subTitle, detail)
       sy.log(`返回结果代码:${result.code}，返回信息:${result.msg}`)
      })
+   sy.done()
   }
 
  function init() {
