@@ -14,23 +14,23 @@ by Macsuny
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
 [Script]
-cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou_sign.js
+cron "0 9 * * *" script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou_sign2.js
 # 获取快手极速版 Cookie.
-http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou2.js
+http-request https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou_sign2.js
 ~~~~~~~~~~~~~~~~
 QX 1.0.5 :
 [task_local]
-0 9 * * * kuaishou2.js
+0 9 * * * kuaishou_sign2.js
 
 [rewrite_local]
 # Get bilibili cookie. QX 1.0.5(188+):
-https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishou2.js
+https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview url script-request-header kuaishou_sign2.js
 ~~~~~~~~~~~~~~~~
 QX or Surge MITM = nebula.kuaishou.com
 ~~~~~~~~~~~~~~~~
 
 */
-const CookieName = '快手极速2'
+const CookieName = '快手极速版'
 const cookieKey = 'cookie_ks2'
 const sy = init()
 const cookieVal = sy.getdata(cookieKey);
@@ -75,20 +75,19 @@ sy.done
 function sign() {
       let detail = ``
       let subTitle = ``
-	  let signurl = {
+	 let signurl = {
 		url: 'https://nebula.kuaishou.com/rest/n/nebula/sign/sign',
 		headers: {
 			Cookie: cookieVal
 		}
 	}
     sy.get(signurl, (error, response, data) => {
-      //sy.log(`${cookieName}, data: ${data}`)
+      sy.log(`${CookieName}, data: ${data}`)
       let result = JSON.parse(data)
-      if(result.result == 10007){
+      if(result.result != 0){
         subTitle = `签到结果: ${result.error_msg}`
         sy.msg(CookieName,subTitle,'')
         sy.done()
-      } else {
       } 
      })
 	let earnurl = {
@@ -98,7 +97,7 @@ function sign() {
 		}
 	}
     sy.get(earnurl, (error, response, data) => {
-      //sy.log(`${cookieName}, data: ${data}`)
+      sy.log(`${CookieName}, data: ${data}`)
       let result = JSON.parse(data)
      if (result.data.nebulaSignInPopup.button == '立即签到'){ 
        subTitle = `签到成功: ${result.data.nebulaSignInPopup.subTitle}, ${result.data.nebulaSignInPopup.title}`
@@ -110,9 +109,9 @@ function sign() {
     headers: {Cookie:cookieVal}
    }
 	sy.get(reurl, (error, response, data) =>{
-		//sy.log(`${cookieName}, data: ${data}`)
-		let result = JSON.parse(data) 
-	  if (result.result == 1) {
+	sy.log(`${CookieName}, data: ${data}`)
+	let result = JSON.parse(data) 
+	if (result.result == 1) {
 	        detail = `现金收益: 💵${result.data.allCash}元    金币收益: 💰${result.data.totalCoin}`
 			sy.msg(CookieName,subTitle,detail)
 			//sy.log(title,subTitle,detail)
@@ -120,9 +119,8 @@ function sign() {
 		   } 
 	    })
       }
-   sy.done()
+sy.done()
       
-
 function init() {
   isSurge = () => {
     return undefined === this.$httpClient ? false : true
