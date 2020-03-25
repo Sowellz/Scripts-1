@@ -30,7 +30,7 @@ QX or Surge MITM = nebula.kuaishou.com
 ~~~~~~~~~~~~~~~~
 
 */
-const CookieName = '快手极速'
+const CookieName = '快手极速版'
 const cookieKey = 'cookie_ks'
 const sy = init()
 const cookieVal = sy.getdata(cookieKey);
@@ -84,11 +84,11 @@ function sign() {
     sy.get(signurl, (error, response, data) => {
       sy.log(`${CookieName}, data: ${data}`)
       let result = JSON.parse(data)
-      if(result.result != 0){
+      if(result.result == 10007){
         subTitle = `签到结果: ${result.error_msg}`
         sy.msg(CookieName,subTitle,'')
-        sy.done()
-      } 
+       }
+          sy.done()
      })
 	let earnurl = {
 		url: 'https://nebula.kuaishou.com/rest/n/nebula/sign/query',
@@ -113,10 +113,9 @@ function sign() {
 	let result = JSON.parse(data) 
 	if (result.result == 1) {
 	        detail = `现金收益: 💵${result.data.allCash}元    金币收益: 💰${result.data.totalCoin}`
-			sy.msg(CookieName,subTitle,detail)
-			//sy.log(title,subTitle,detail)
-			} else {
-		   } 
+			sy.msg(CookieName,subTitle,detail)	
+			} 
+          sy.log(`错误代码: ${result.result}, 返回信息: ${result.error_msg}`)
 	    })
       }
 sy.done()
