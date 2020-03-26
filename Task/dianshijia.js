@@ -39,7 +39,6 @@ if (isGetCookie) {
   } else {
    sign()
   }
-
 function GetCookie() {
 const requrl = $request.url
 if ($request && $request.method != 'OPTIONS') {
@@ -62,7 +61,6 @@ return new Promise((resolve, reject) => {
     sy.get(url, (error, response, data) => {
     //sy.log(`${cookieName}, data: ${data}`)
     const result = JSON.parse(data)
-
     if (result.errCode == 0) {
       subTitle = `签到结果: 成功🎉`
       detail = `已签到 ${result.data.conDay}天，获取金币${result.data.reward[0].count}，获得奖励${result.data.reward[1].name}`
