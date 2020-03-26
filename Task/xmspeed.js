@@ -38,6 +38,13 @@ const CookieName ='喜马拉雅极速版'
 const CookieKey = 'sy_cookie_xmspeed'
 const sy = init()
 const cookieVal = sy.getdata(CookieKey);
+const signheaderKey = 'sy_signheader_xmspeed'
+const signbodyKey = 'sy_signbody_xmspeed'
+const signheaderVal = sy.getdata(signheaderKey)
+const signbodyVal = `{
+ "checkData": "VdcQOtRHeCRyPYfHo4KJQ976ZOIfWG+yHJgJ6PVdNmtx3e+SRCjCKdEGlkJUnSaRonQAfU7Fd3VwX+miT8nNClllvxwEhQC8QVr5Pi295nxW3YIrPJqNfhBbJl3WQq5qcLQeoGmolH/hVqa9TkXJvvsijzESTzeigwXfY17iLWE="
+}`
+
 let isGetCookie = typeof $request !== 'undefined'
 
 if (isGetCookie) {
@@ -48,6 +55,9 @@ if (isGetCookie) {
 function GetCookie() {
   if ($request.headers) {
     var CookieValue = $request.headers['Cookie'];
+    
+      const signbodyVal = $request.body
+      if (signbodyVal) sy.setdata(signbodyVal, signbodyKey)
     
     if (sy.getdata(CookieKey) != (undefined || null)) {
       if (sy.getdata(CookieKey) != CookieValue) {
@@ -77,26 +87,53 @@ function sign() {
       const title = `${CookieName}`
       let subTitle = ``
       let detail = ``
-    let url = {url: 'https://m.ximalaya.com/speed/task-center/account/coin',
-    headers: { Cookie:cookieVal}}   
-     
-    sy.get(url, (error, response, data) => {
+let signurl = {url: 'https://m.ximalaya.com/speed/task-center/check-in/check',
+    headers: JSON.parse(signheaderVal), body: signbodyVal
+} 
+  signurl.headers['Host'] = 'm.ximalaya.com'
+  signurl.headers['Origin'] = 'https://m.ximalaya.com/'
+  signurl.headers['Referer'] = 'https://m.ximalaya.com/speed/task-center/home'
+  signurl.headers['Accept'] = 'application/json, text/plain, */*'
+  signurl.headers['Content-Type'] = 'application/json;charset=utf-8'
+  signurl.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 iting/1.0.8 kdtunion_iting/1.0 iting(main)/1.0.8/ios_1'
+    sy.post(signurl, (error, response, data) => {
     sy.log(`${CookieName}, data: ${data}`)
-      
-     if (data == ""){
+    let result = JSON.parse(data) 
+    if (result.errorCode == -1){
        subTitle = `签到失败: 配置缺失❌`
        detail = '说明:请重新获取Cookie'
-     } else {
+      sy.msg(title, subTitle, detail)
+      } else if (result == -1){
+       subTitle = `签到结果: 重复`
+     }
+    })
+     let cashurl = {url: 'http://m.ximalaya.com/speed/web-earn/account/cash',
+    headers: { Cookie:cookieVal}
+    }        
+    sy.get(cashurl, (error, response, data) => {
+    sy.log(`${CookieName}, data: ${data}`)
      let result = JSON.parse(data) 
-       subTitle = `签到结果:  成功`
-       detail = `今日获取金币：${result.total}`
+     if (result.balance != ""){
+       detail = `现金收益:${result.balance}元💸  `
+      }  
+    })
+     let totalurl = {url: 'https://m.ximalaya.com/speed/task-center/account/coin',
+    headers: { Cookie:cookieVal}
+    }        
+    sy.get(totalurl, (error, response, data) => {
+    sy.log(`${CookieName}, data: ${data}`)
+     let result = JSON.parse(data) 
+     if (result.total != ""){
+       subTitle += ''
+       detail += `今日获取金币:${result.total}💰`  
       }  
       sy.msg(title, subTitle, detail)
     })
     sy.done()
-}
- function init() {
-    isSurge = () => {
+  }
+      
+function init() {
+  isSurge = () => {
       return undefined === this.$httpClient ? false : true
     }
     isQuanX = () => {
