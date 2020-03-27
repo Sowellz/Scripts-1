@@ -1,5 +1,8 @@
 /* 本脚本为电视节目预告
 1.数据从电视家数据库获取
+2.常用卫视代码
+北京: btv1 | 湖南: hunan | 浙江: zhejiang
+河南: henan| 江苏: jiangsu|广东: guangdong
 
 [task_local]
 1 10 * * * tvpreview.js
