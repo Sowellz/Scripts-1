@@ -3,6 +3,7 @@
 2.常用卫视代码
 北京: btv1 | 湖南: hunan | 浙江: zhejiang
 河南: henan| 江苏: jiangsu|广东: guangdong
+3.需要更换电视台的，建议本地使用
 
 [task_local]
 1 10 * * * tvpreview.js
