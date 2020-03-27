@@ -1,4 +1,5 @@
-/* 本脚本数据从电视家数据库获取
+/* 本脚本为电视节目预告
+1.数据从电视家数据库获取
 
 [task_local]
 1 10 * * * tvpreview.js
@@ -9,7 +10,7 @@
 By Macsuny
                    
 */
-var c = "cctv1"  // 更改电视台，从电视家网络活动中获取，央视可以直接改后缀数字
+var c = "cctv1"  // 可更改电视台，从电视家网络活动中获取，央视可以直接改后缀数字
 var wurl = {
     url: "http://api.cntv.cn/epg/epginfo?serviceId=cbox&c="+c,
 };
