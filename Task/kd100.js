@@ -1,16 +1,20 @@
-const cookieName = '腾讯微视'
-const signurlKey = 'sy_signurl_ws'
-const signheaderKey = 'sy_signheader_ws'
-const sy = init()
+const cookieName = '美团'
+const tokenurlKey = 'chavy_tokenurl_meituan'
+const tokenheaderKey = 'chavy_tokenheader_meituan'
+const signurlKey = 'chavy_signurl_meituan'
+const signheaderKey = 'chavy_signheader_meituan'
+const signbodyKey = 'chavy_signbody_meituan'
+const chavy = init()
+
 const requrl = $request.url
-if ($request && $request.method != 'OPTIONS') {
+if ($request && $request.method != 'OPTIONS' && requrl.match(/\/evolve\/signin\/signpost\//)) {
   const signurlVal = requrl
   const signheaderVal = JSON.stringify($request.headers)
-  //sy.log(`signurlVal:${signurlVal}`)
-  //sy.log(`signheaderVal:${signheaderVal}`)
-  if (signurlVal) sy.setdata(signurlVal, signurlKey)
-  if (signheaderVal) sy.setdata(signheaderVal, signheaderKey)
-  sy.msg(cookieName, `获取Cookie: 成功🎉`, ``)
+  const signbodyVal = $request.body
+  if (signurlVal) chavy.setdata(signurlVal, signurlKey)
+  if (signheaderVal) chavy.setdata(signheaderVal, signheaderKey)
+  if (signbodyVal) chavy.setdata(signbodyVal, signbodyKey)
+  chavy.msg(cookieName, `获取Cookie: 成功`, ``)
 }
 
 function init() {
@@ -56,4 +60,4 @@ function init() {
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
 }
-sy.done()
+chavy.done()
