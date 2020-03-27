@@ -87,7 +87,7 @@ function sign() {
       const title = `${CookieName}`
       let subTitle = ``
       let detail = ``
-let signurl = {url: 'https://m.ximalaya.com/speed/task-center/check-in/check',
+let signurl = {url: 'https://m.ximalaya.com/speed/task-center/config/task-center',
     headers: JSON.parse(signheaderVal), body: signbodyVal
 } 
   signurl.headers['Host'] = 'm.ximalaya.com'
@@ -96,7 +96,7 @@ let signurl = {url: 'https://m.ximalaya.com/speed/task-center/check-in/check',
   signurl.headers['Accept'] = 'application/json, text/plain, */*'
   signurl.headers['Content-Type'] = 'application/json;charset=utf-8'
   signurl.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 iting/1.0.8 kdtunion_iting/1.0 iting(main)/1.0.8/ios_1'
-    sy.post(signurl, (error, response, data) => {
+    sy.get(signurl, (error, response, data) => {
     sy.log(`${CookieName}, data: ${data}`)
     let result = JSON.parse(data) 
     if (result.errorCode == -1){
