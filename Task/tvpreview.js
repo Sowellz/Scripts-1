@@ -37,9 +37,9 @@ var wurl = {
      try{ 
       let result = JSON.parse(response.body)
       var i = 0                          
-      const title = `${result[`${c}`].channelName}节目预告   ` + M + '月'+ D + '日'+ n + h +':'+ m 
-      subTitle = `正在播出: ${result[`${c}`].isLive}`
-      detail = `${result[`${c}`].program[i].showTime} ${result[`${c}`].program[i].t}`
+      const title = `现在是`+ M +'月'+ D +'日' + n + h +':'+ m 
+      subTitle = `${result[`${c}`].channelName}频道 节目预告  ` 
+      detail = `正在播出: ${result[`${c}`].isLive}\n${result[`${c}`].program[i].showTime} ${result[`${c}`].program[i].t}`
       
       for (i = 1; i < result[`${c}`].program.length; i++){
       detail += `\n${result[`${c}`].program[i].showTime} ${result[`${c}`].program[i].t}`
